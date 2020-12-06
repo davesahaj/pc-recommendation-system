@@ -15,7 +15,7 @@ public interface ConnectionProvider {
 	String dbuser = "droujzvutvbxbx";
 	String dbpassword = "dc3ed5e6e4cefa35575b10ea1596d11f805bd489594eaefac96975cf121d6c98";
 	String dbdriver = "org.postgresql.Driver";
-
+	//exposed at the moment
 	public void loadDriver(String dbdriver);
 
 	public Connection getConnection();
