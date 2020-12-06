@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body{
+    font-family: sans-serif;
+    background-color: #ccc;
+
+}
+
+.container{
+    position: relative;
+    margin: 0;
+    
+}
+
+.btn:hover{
+    background-color: rgb(7, 89, 172);
+}
+
+
+
+
+

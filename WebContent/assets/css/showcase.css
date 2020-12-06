@@ -1,0 +1,91 @@
+
+.showcase{
+    height: 350px;
+   
+   background: linear-gradient(90deg,rgb(105, 1, 105),rgb(138, 2, 138),rgb(235, 0, 235),rgb(250, 110, 255));
+   background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("../images/Banner.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+   
+}
+
+.showcase .content{
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+     align-items: center;
+    
+    
+}
+
+.showcase .content p,h1{
+    color: white;
+    font-size: 1.7em;
+    text-align: center;
+    
+}
+
+.showcase .content .searchbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    width:40%;
+    margin-top: 20px;
+    position: relative;
+    height: 60px;
+}
+
+.showcase .content .searchbar input{
+  border: none;
+  padding: 0px 10px;
+  font-size: 1.1em;
+ 
+}
+
+
+
+.showcase .content .searchbar button{
+    border-radius: 15px;
+    width: 110px;
+    background-color:#05386B;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    margin-left: 90px;
+    
+}
+
+
+
+/* Media queries */
+@media(max-width:500px)
+{
+    .showcase .content{
+        width: 80%;
+    }
+
+    .showcase .content p,h1{
+        font-size: 1.5em;
+    }
+    
+
+
+    .showcase .content .searchbar input{
+        width: 100%;
+    }
+
+    .showcase .content .searchbar{
+        width: 70%;
+    }
+
+
+}
