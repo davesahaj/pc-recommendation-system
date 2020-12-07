@@ -507,7 +507,7 @@ translateY
 				<div class="col-md-3 register-left">
 					<img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
 					<h3>Welcome</h3>
-					<p>You are 30 seconds away from building your dream PC!</p>
+					<p>You are 30 seconds away from building your dream PC! bla bla bla</p>
 					<a href="register.jsp"><input type="button" name=""
 						value="Register" /></a><br />
 				</div>
