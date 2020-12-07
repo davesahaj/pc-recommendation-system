@@ -1,12 +1,22 @@
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.net.URLEncoder;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * Servlet implementation class Login
@@ -42,6 +52,12 @@ public class Login extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		
+		////////////////////
+		//TEMP CODE FOR WEB SCRAPPER TESTING
+		
+
+		////////////////////
 
 		User user = new User("tempuser", email, password);
 
