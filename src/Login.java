@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
 		String baseUrl = "https://newyork.craigslist.org/";
 		WebClient client = new WebClient();
 		client.getOptions().setCssEnabled(false);
-		client.getOptions().setJavaScriptEnabled(false);
+		//client.getOptions().setJavaScriptEnabled(false);
 
 		try {
 			String searchUrl = baseUrl + "search/sss?sort=rel&query=" + URLEncoder.encode(searchQuery, "UTF-8");
