@@ -51,44 +51,39 @@ public class Login extends HttpServlet {
 
 		////////////////////
 		// TEMP CODE FOR WEB SCRAPPER TESTING
-		String scrapperstring;
+		String scrapperstring = "";
 
 		try {
 			Document doc = Jsoup.connect("https://www.codetriage.com/?language=Java").get();
-			 scrapperstring = doc.title();
+			scrapperstring = scrapperstring + doc.title();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		PrintWriter writer = response.getWriter();	
+
+		PrintWriter writer = response.getWriter();
 		String htmlRespone = "<html>";
-        htmlRespone += "<h2>Your email is: " + email + "<br/>";      
-        htmlRespone += "website title is: " + scrapperstring+ "</h2>";    
-        htmlRespone += "</html>";
-         
-        // return response
-        writer.println(htmlRespone);
+		htmlRespone += "<h2>Your email is: " + email + "<br/>";
+		htmlRespone += "website title is: " + scrapperstring + "</h2>";
+		htmlRespone += "</html>";
+
+		// return response
+		writer.println(htmlRespone);
 		////////////////////
 
-		/*User user = new User("tempuser", email, password);
-
-		LoginDAO ld = new LoginDAO();
-		System.out.println("LoginDAO connected!");
-		String userValidate;
-		try {
-			userValidate = ld.AuthenticateUser(user);
-
-			if (userValidate.equals("SUCCESS")) {
-				response.getWriter().print(userValidate);
-				request.getRequestDispatcher("/home.jsp").forward(request, response);
-			} else {
-				response.getWriter().print(userValidate);
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		/*
+		 * User user = new User("tempuser", email, password);
+		 * 
+		 * LoginDAO ld = new LoginDAO(); System.out.println("LoginDAO connected!");
+		 * String userValidate; try { userValidate = ld.AuthenticateUser(user);
+		 * 
+		 * if (userValidate.equals("SUCCESS")) {
+		 * response.getWriter().print(userValidate);
+		 * request.getRequestDispatcher("/home.jsp").forward(request, response); } else
+		 * { response.getWriter().print(userValidate);
+		 * request.getRequestDispatcher("/login.jsp").forward(request, response); } }
+		 * catch (SQLException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); }
+		 */
 
 		doGet(request, response);
 	}
