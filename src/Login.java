@@ -56,7 +56,7 @@ public class Login extends HttpServlet {
 		try {
 			Document doc = Jsoup.connect("https://www.amazon.in/Crucial-4gb-ddr4-2666-Desktop/dp/B07GMRJTS9").get();
 			Element elementByID = doc.getElementById("priceblock_ourprice");
-			scrapperstring = scrapperstring + elementByID.text();
+			scrapperstring = scrapperstring + elementByID.val();
 
 		} catch (IOException e) {
 			e.printStackTrace();
