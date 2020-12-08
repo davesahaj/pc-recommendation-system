@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -50,16 +51,26 @@ public class Login extends HttpServlet {
 
 		////////////////////
 		// TEMP CODE FOR WEB SCRAPPER TESTING
+		/*String scrapperstring;
 
 		try {
 			Document doc = Jsoup.connect("https://www.codetriage.com/?language=Java").get();
-			System.out.printf("Title: %s\n", doc.title());
+			 scrapperstring = doc.title();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
+		PrintWriter writer = response.getWriter();	
+		String htmlRespone = "<html>";
+        htmlRespone += "<h2>Your email is: " + email + "<br/>";      
+        htmlRespone += "Your password is: " + password + "</h2>";    
+        htmlRespone += "</html>";
+         
+        // return response
+        writer.println(htmlRespone);
 		////////////////////
 
-		User user = new User("tempuser", email, password);
+		/*User user = new User("tempuser", email, password);
 
 		LoginDAO ld = new LoginDAO();
 		System.out.println("LoginDAO connected!");
@@ -77,7 +88,7 @@ public class Login extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		doGet(request, response);
 	}
