@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 
 		////////////////////
 		// TEMP CODE FOR WEB SCRAPPER TESTING
-		/*String scrapperstring;
+		String scrapperstring;
 
 		try {
 			Document doc = Jsoup.connect("https://www.codetriage.com/?language=Java").get();
@@ -59,11 +59,11 @@ public class Login extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		*/
+		
 		PrintWriter writer = response.getWriter();	
 		String htmlRespone = "<html>";
         htmlRespone += "<h2>Your email is: " + email + "<br/>";      
-        htmlRespone += "Your password is: " + password + "</h2>";    
+        htmlRespone += "website title is: " + scrapperstring+ "</h2>";    
         htmlRespone += "</html>";
          
         // return response
