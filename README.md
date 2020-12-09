@@ -1,10 +1,6 @@
 # PC Recommendation System
 > A Java Enterprise Website to help you build the PC of your dreams without hassle.
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
 ## Development setup
 
 Clone the repo and deploy it on heroku. You might want to add your own postres implementation.
