@@ -1,4 +1,8 @@
+package dao;
 import java.sql.Statement;
+
+import users.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
