@@ -1,28 +1,25 @@
 package users;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.LoginDAO;
+import dao.RegisterDAO;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Register
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Register")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public RegisterServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,27 +40,24 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String username = request.getParameter("username");
 
-		User user = new User("tempuser", email, password);
+		User user = new User(username, email, password);
 
-		LoginDAO ld = new LoginDAO();
-		System.out.println("LoginDAO connected!");
-		String userValidate;
-		try {
-			userValidate = ld.AuthenticateUser(user);
+		RegisterDAO rdao = new RegisterDAO();
+		String result = rdao.insert(user);
 
-			if (userValidate.equals("SUCCESS")) {
-				response.getWriter().print(userValidate);
-				request.getRequestDispatcher("/home.jsp").forward(request, response);
-			} else {
-				response.getWriter().print(userValidate);
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
-			}
-		} catch (SQLException e) { // TODO Auto-generated catch block
-			e.printStackTrace();
+		response.getWriter().print(result);
+		
+		if (result.equals("SUCCESS")) {
+			response.getWriter().print(result);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		} else {
+			response.getWriter().print(result);
+			request.getRequestDispatcher("/register.jsp").forward(request, response);
 		}
 
 		doGet(request, response);

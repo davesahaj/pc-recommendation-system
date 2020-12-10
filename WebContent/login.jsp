@@ -529,7 +529,7 @@ translateY
 
 
 
-	<form action="Login" method="POST">
+	<form action="login" method="POST">
 		<div class="container register">
 			<div class="row">
 				<div class="col-md-3 register-left">
