@@ -10,7 +10,7 @@ Clone the repo and deploy it on heroku. You might want to add your own postres i
 
 
 * 0.0.1
-    * Work in progress
+    * Work in progress ***https://pc-recommendation-system.herokuapp.com***
 
 ## Meta
 
