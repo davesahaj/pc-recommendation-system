@@ -12,7 +12,7 @@ import dao.RegisterDAO;
 /**
  * Servlet implementation class Register
  */
-@WebServlet("/register")
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
