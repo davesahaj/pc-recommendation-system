@@ -8,6 +8,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class ProductTracker {
+	
+	//String data = 
 	////////////////////
 	// TEMP CODE FOR WEB SCRAPPER TESTING
 	/*
@@ -25,5 +27,19 @@ public class ProductTracker {
 	 * ="website price is: "+scrapperstring+"</h2>";htmlRespone+="</html>";
 	 * 
 	 * // return response writer.println(htmlRespone); ////////////////////
+	 * 
+	 * 
+	 * IDS:
+	 * processor	10000000	
+	 * motherboard	11000000
+	 * cabinet		12000000
+	 * ram			13000000
+	 * storage		14000000
+	 * graphic card	15000000
+	 * power supply	16000000
+	 * HDD			17000000
+	 * SSD			18000000
+	 * 
+	 * 
 	 */
 }

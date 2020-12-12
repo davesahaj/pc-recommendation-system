@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;  
 
 import dao.LoginDAO;
 
@@ -57,6 +58,14 @@ public class LoginServlet extends HttpServlet {
 
 			if (userValidate.equals("SUCCESS")) {
 				response.getWriter().print(userValidate);
+				
+				HttpSession session=request.getSession();  
+		        session.setAttribute("uname",email);
+		        session.setAttribute("pass", password);
+		        session.setMaxInactiveInterval(30*60);
+		        
+		        
+		        
 				request.getRequestDispatcher("/home.jsp").forward(request, response);
 			} else {
 				response.getWriter().print(userValidate);
