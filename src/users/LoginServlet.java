@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("/home.jsp").forward(request, response);
 			} else {
 				response.getWriter().print(userValidate);
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
+				request.getRequestDispatcher("/xd.jsp").forward(request, response);
 			}
 		} catch (SQLException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
