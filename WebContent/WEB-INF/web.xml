@@ -8,31 +8,31 @@
 	<servlet>
 		<servlet-name>Login</servlet-name>
 		<servlet-class>users.LoginServlet</servlet-class>
-		<jsp-file>/login.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
-		<url-pattern>/Login</url-pattern>
+		<url-pattern>/login</url-pattern>
 		<url-pattern></url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Register</servlet-name>
 		<servlet-class>users.RegisterServlet</servlet-class>
-		<jsp-file>/register.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-		<servlet-name>Home</servlet-name>
-		<jsp-file>/home.jsp</jsp-file>
-	</servlet>
+	<servlet-name>Home</servlet-name>
+	<jsp-file>/home.jsp</jsp-file>
+</servlet>
+	<!--mapping -->
 	<servlet-mapping>
 		<servlet-name>Home</servlet-name>
 		<url-pattern>/home</url-pattern>
 	</servlet-mapping>
+
 
 </web-app>

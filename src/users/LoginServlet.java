@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;  
+import javax.servlet.http.HttpSession;
 
 import dao.LoginDAO;
 
@@ -45,6 +45,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println("LoginServlet invoked...!");
+
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
@@ -58,12 +60,13 @@ public class LoginServlet extends HttpServlet {
 
 			if (userValidate.equals("SUCCESS")) {
 				response.getWriter().print(userValidate);
-				
+				HttpSession session = request.getSession();
+				session.setAttribute("email", email);
+				response.sendRedirect("home.jsp");
 
-				request.getRequestDispatcher("/home.jsp").forward(request, response);
 			} else {
 				response.getWriter().print(userValidate);
-				request.getRequestDispatcher("/xd.jsp").forward(request, response);
+				response.sendRedirect("login.jsp");
 			}
 		} catch (SQLException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
