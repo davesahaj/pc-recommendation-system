@@ -59,15 +59,8 @@ public class LoginServlet extends HttpServlet {
 			if (userValidate.equals("SUCCESS")) {
 				response.getWriter().print(userValidate);
 				
-				HttpSession session=request.getSession();  
-		        session.setAttribute("uname",email);
-		        session.setAttribute("pass", password);
-		        session.setMaxInactiveInterval(30*60);
-				response.sendRedirect("home");
-		        
-		        
-		        
-				//request.getRequestDispatcher("/home.jsp").forward(request, response);
+
+				request.getRequestDispatcher("/home.jsp").forward(request, response);
 			} else {
 				response.getWriter().print(userValidate);
 				request.getRequestDispatcher("/login.jsp").forward(request, response);
