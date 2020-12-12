@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	if (session.getAttribute("uname") == null || session.getAttribute("pass") == null) {
-	response.sendRedirect("login.jsp");
+	if (session == null) {
+	response.sendRedirect("/login");
 }
 %>
 <!DOCTYPE html>
