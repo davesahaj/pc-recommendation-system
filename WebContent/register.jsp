@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false"	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -522,20 +521,20 @@ translateY
 	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
 	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Create New Account</title>
 </head>
 <body>
 
 
 
 
-	<form action="register" method="POST">
+	<form action="RegisterServlet" method="POST">
 		<div class="container register">
 			<div class="row">
 				<div class="col-md-3 register-left">
 					<img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
 					<h3>Welcome</h3>
-					<p>You are 30 seconds away from building your dream PC!</p>
+					<p>You are 1 minute away from building your dream PC!</p>
 					<a href="login.jsp"><input type="button" name="" value="Login" /></a><br />
 				</div>
 				<div class="col-md-9 register-right">

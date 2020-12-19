@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" session="false"%>
 
-<%
-      if(session.getAttribute("email")==null)
-      {
-    	  response.sendRedirect("login.jsp");
-      }
-   %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,9 +39,17 @@
 			<ul>
 				<li><a href="home.jsp" id="active">Home</a></li>
 				<li><a href="explore.jsp">Explore</a></li>
-				<li><a href="login.jsp">Log In</a></li>
 				<li><a href="aboutus.jsp">About us</a></li>
-				<li class="user"><a href="profile.jsp">My Profile</a></li>
+				<%
+					HttpSession session = request.getSession(false);
+				if (session != null) {
+					String username = (String)session.getAttribute("user");
+					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
+				} else {
+					out.print("<li><a href=login.jsp>Log In</a></li>");
+				}
+				%>
+
 			</ul>
 		</section>
 	</section>

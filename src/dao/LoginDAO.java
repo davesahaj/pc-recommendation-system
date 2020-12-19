@@ -1,4 +1,5 @@
 package dao;
+
 import java.sql.Statement;
 
 import users.User;
@@ -11,37 +12,33 @@ import java.sql.SQLException;
 public class LoginDAO {
 	ConnectionImplementer cni = new ConnectionImplementer();
 
-	public String AuthenticateUser(User user) throws SQLException {
+	public User AuthenticateUser(String email, String password) throws SQLException {
 
-		String email = user.getEmail();
-		String password = user.getPassword();
+		String username = null;
 		String emailDB = "";
 		String passwordDB = "";
-		String result = "Data entered successfully";
-		String sql = "select email,password from users";
+		String sql = "select * from users where email=? and password=?";
 
 		cni.loadDriver(ConnectionProvider.dbdriver);
 		Connection con = cni.getConnection();
 
-		System.out.println("Authenticating...!");
-		Statement statement = con.createStatement();
-		ResultSet resultset = statement.executeQuery(sql);
+		PreparedStatement query = con.prepareStatement(sql);
+		query.setString(1, email);
+		query.setString(2, password);
 
-		while (resultset.next()) {
-			emailDB = resultset.getString("email"); // fetch the values present in database
-			passwordDB = resultset.getString("password");
+		ResultSet result = query.executeQuery();
 
-			System.out.println("checking email: " + email + " with " + emailDB);
-			System.out.println("checking password: " + password + " with " + passwordDB);
+		User user = null;
 
-			if (email.equals(emailDB) && password.equals(passwordDB)) {
-
-				System.out.println("Authentication successful!");
-				return "SUCCESS";
-			}
+		if (result.next()) {
+			user = new User();
+			user.setUsername(result.getString("username"));
+			user.setEmail(email);
 		}
 
-		System.out.println("Authentication failed!");
-		return "Invalid user credentials";
+		con.close();
+		
+		return user;
+
 	}
 }

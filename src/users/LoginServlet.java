@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
+import javax.servlet.RequestDispatcher;
 
 import dao.LoginDAO;
 
@@ -45,34 +47,32 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("LoginServlet invoked...!");
-
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		User user = new User("tempuser", email, password);
+		LoginDAO Logindao = new LoginDAO();
 
-		LoginDAO ld = new LoginDAO();
-		System.out.println("LoginDAO connected!");
-		String userValidate;
 		try {
-			userValidate = ld.AuthenticateUser(user);
 
-			if (userValidate.equals("SUCCESS")) {
-				response.getWriter().print(userValidate);
+			User user = Logindao.AuthenticateUser(email, password);
+			String destination = "login.jsp";
+
+			if (user != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("email", email);
-				response.sendRedirect("home.jsp");
+				session.setAttribute("user", user.getUsername());
+				destination = "home.jsp";
 
 			} else {
-				response.getWriter().print(userValidate);
-				response.sendRedirect("login.jsp");
+				String message = "Invalid email/password";
+				request.setAttribute("message", message);
+
 			}
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
+			dispatcher.forward(request, response);
 		} catch (SQLException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		doGet(request, response);
 	}
 
 }

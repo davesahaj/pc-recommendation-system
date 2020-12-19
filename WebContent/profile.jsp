@@ -1,10 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%
-	if (session.getAttribute("uname") == null || session.getAttribute("pass") == null) {
-	response.sendRedirect("login.jsp");
-}
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false"	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,12 +36,23 @@
 
 		<section class="menu-wrapper">
 			<ul>
-				<li><a href="home.jsp">Home</a></li>
+				<li><a href="home.jsp" id="active">Home</a></li>
 				<li><a href="explore.jsp">Explore</a></li>
-				<li><a href="login.jsp">Log In</a></li>
 				<li><a href="aboutus.jsp">About us</a></li>
-				<li class="user"><a href="profile.jsp" id="active">My
-						Profile</a></li>
+				<%
+					HttpSession session = request.getSession(false);
+				if (session != null) {
+					String username = (String) session.getAttribute("user");
+					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
+				} else {
+					String message = "Please Login First";
+					request.setAttribute("message", message);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+					dispatcher.forward(request, response);
+					//response.sendRedirect("login.jsp");
+				}
+				%>
+
 			</ul>
 		</section>
 	</section>
