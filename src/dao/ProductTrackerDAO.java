@@ -33,16 +33,40 @@ public class ProductTrackerDAO {
 	}
 
 	public void setPrice(int id, float price, String platform) throws SQLException {
-		
+
 		cni.loadDriver(ConnectionProvider.dbdriver);
 		Connection con = cni.getConnection();
 
-		String sql = "update productprice set product_price = jsonb_set(product_price::jsonb, '{"+platform+",price}', jsonb '"+price+"') where product_id=?;";
-		
+		String sql = "update productprice set product_price = jsonb_set(product_price::jsonb, '{" + platform
+				+ ",price}', jsonb '" + price + "') where product_id=?;";
+
 		PreparedStatement query = con.prepareStatement(sql);
 
 		query.setInt(1, id);
 		query.executeUpdate();
+
+		con.close();
+	}
+
+	public void getPrice(int id, String platform) throws SQLException {
+
+		cni.loadDriver(ConnectionProvider.dbdriver);
+		Connection con = cni.getConnection();
+
+		String sql = "select product_id as pid, product_price->?->>'price' as price from productprice where product_id=?;";
+
+		PreparedStatement query = con.prepareStatement(sql);
+
+		query = con.prepareStatement(sql);
+		query.setString(1, platform);
+		query.setInt(2, id);
+
+		ResultSet result = query.executeQuery();
+
+		if (result.next()) {
+
+			System.out.println("Updated price is: " + result.getString("price"));
+		}
 
 		con.close();
 	}

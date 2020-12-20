@@ -51,14 +51,13 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		ProductTracker pt = new ProductTracker();
+		/*ProductTracker pt = new ProductTracker();
 		try {
-			int price = pt.PriceFetcher(10000002,"amazon");
-			System.out.println(price);
+		
 			pt.PriceUpdater(10000002, "amazon");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 
 		LoginDAO Logindao = new LoginDAO();
 
