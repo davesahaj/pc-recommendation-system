@@ -14,9 +14,7 @@ public class LoginDAO {
 
 	public User AuthenticateUser(String email, String password) throws SQLException {
 
-		String username = null;
-		String emailDB = "";
-		String passwordDB = "";
+
 		String sql = "select * from users where email=? and password=?";
 
 		cni.loadDriver(ConnectionProvider.dbdriver);

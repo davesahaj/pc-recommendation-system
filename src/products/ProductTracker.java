@@ -1,45 +1,74 @@
 package products;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import dao.ProductTrackerDAO;
+
 public class ProductTracker {
-	
-	//String data = 
-	////////////////////
-	// TEMP CODE FOR WEB SCRAPPER TESTING
-	/*
-	 * String scrapperstring = "null";
-	 * 
-	 * try { Document doc = Jsoup.connect(
-	 * "https://www.amazon.in/Crucial-4gb-ddr4-2666-Desktop/dp/B07GMRJTS9").get();
-	 * Element elementByID = doc.getElementById("priceblock_ourprice");
-	 * scrapperstring = scrapperstring + (String) elementByID.val();
-	 * 
-	 * }catch( IOException e) { e.printStackTrace(); }
-	 * 
-	 * PrintWriter writer = response.getWriter(); String htmlRespone =
-	 * "<html>";htmlRespone+="<h2>Your email is: "+email+"<br/>";htmlRespone+
-	 * ="website price is: "+scrapperstring+"</h2>";htmlRespone+="</html>";
-	 * 
-	 * // return response writer.println(htmlRespone); ////////////////////
-	 * 
-	 * 
-	 * IDS:
-	 * processor	10000000	
-	 * motherboard	11000000
-	 * cabinet		12000000
-	 * ram			13000000
-	 * storage		14000000
-	 * graphic card	15000000
-	 * power supply	16000000
-	 * HDD			17000000
-	 * SSD			18000000
-	 * 
-	 * 
-	 */
+
+	public int sanatizePriceData(String price) {
+
+		char[] digits = price.toCharArray();
+		price = "";
+
+		for (char digit : digits) {
+			if (digit == '.')
+				break;
+
+			if (Character.isDigit(digit))
+				price += digit;
+
+		}
+		return Integer.parseInt(price);
+	}
+
+	public int PriceFetcher(int id, String platform) throws SQLException {
+		try {
+			// "https://www.amazon.in/ADATA-AD4U2400J4G17-R-2400MHz-DDR4-U-DIMM/dp/B0752P9QVM";
+			// https://www.amazon.in/Crucial-4gb-ddr4-2666-Desktop/dp/B07GMRJTS9
+
+			ProductTrackerDAO Producttrackerdao = new ProductTrackerDAO();
+			System.out.println("price fetcher invoked, calling getURL");
+			String url = Producttrackerdao.getURL(id, platform);
+
+			Document document = Jsoup.connect(url).get();
+
+			// get the webpage text
+			Elements elements = document.select("#priceblock_ourprice");
+			if (elements.size() > 0)
+				for (Element e : elements) {
+					return sanatizePriceData(e.ownText());
+				}
+			else {
+				elements = document.select("#priceblock_dealprice");
+
+				for (Element e : elements) {
+					return sanatizePriceData(e.ownText());
+				}
+
+			}
+		} catch (IOException ioe) {
+			System.out.println("Unable to connect to the URL");
+			ioe.printStackTrace();
+			return -1;
+		}
+
+		return -1;
+	}
+
+	public void PriceUpdater(int id, String platform) throws SQLException {
+		
+		int price = PriceFetcher(id, platform);
+		ProductTrackerDAO Producttrackerdao = new ProductTrackerDAO();
+		Producttrackerdao.setPrice(id, price, platform);
+
+		
+		
+	}
 }
