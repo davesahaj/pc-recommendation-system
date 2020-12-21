@@ -11,8 +11,18 @@
 	</servlet>
 
 	<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>users.LogoutServlet</servlet-class>
+	</servlet>
+
+	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
 		<servlet-class>users.RegisterServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>users.AdminServlet</servlet-class>
 	</servlet>
 
 
@@ -26,7 +36,7 @@
 		<url-pattern>/home</url-pattern>
 		<url-pattern></url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Register</servlet-name>
 		<jsp-file>/register.jsp</jsp-file>
@@ -36,7 +46,7 @@
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/register</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Login</servlet-name>
 		<jsp-file>/login.jsp</jsp-file>

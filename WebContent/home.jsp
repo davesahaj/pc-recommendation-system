@@ -45,6 +45,9 @@
 				if (session != null) {
 					String username = (String)session.getAttribute("user");
 					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
+					
+							
 				} else {
 					out.print("<li><a href=login.jsp>Log In</a></li>");
 				}

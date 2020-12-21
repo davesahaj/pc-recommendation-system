@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"  session="false"%>
+	pageEncoding="UTF-8" session="false"%>
+
+<%
+	HttpSession session = request.getSession(false);
+if (session != null) {
+	RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+	dispatcher.forward(request, response);
+}
+%>
 
 
 <!DOCTYPE html>
@@ -89,9 +97,13 @@ body {
 
 
 
+
+
 %
 {
 transform
+
+
 
 
 
@@ -157,6 +169,8 @@ transform
 
 
 
+
+
 translateY
 
 
@@ -188,7 +202,11 @@ translateY
 
 
 
+
+
 (
+
+
 
 
 
@@ -254,7 +272,11 @@ translateY
 
 
 
+
+
 )
+
+
 
 
 
@@ -326,9 +348,13 @@ keyframes mover { 0% {
 
 
 
+
+
 %
 {
 transform
+
+
 
 
 
@@ -394,6 +420,8 @@ transform
 
 
 
+
+
 translateY
 
 
@@ -425,7 +453,11 @@ translateY
 
 
 
+
+
 (
+
+
 
 
 
@@ -491,7 +523,11 @@ translateY
 
 
 
+
+
 )
+
+
 
 
 
@@ -620,9 +656,9 @@ translateY
 				<div class="col-md-3 register-left">
 					<img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
 					<h3>Welcome</h3>
-					<p>You are 30 seconds away from building your dream PC!
-					
-					<br><span style="color:red; font-weight:bold; ">${message}</span>
+					<p>
+						You are 30 seconds away from building your dream PC! <br>
+						<span style="color: red; font-weight: bold;">${message}</span>
 					</p>
 					<a href="register.jsp"><input type="button" name=""
 						value="Register" /></a><br />

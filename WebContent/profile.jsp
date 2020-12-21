@@ -44,6 +44,7 @@
 				if (session != null) {
 					String username = (String) session.getAttribute("user");
 					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
 				} else {
 					String message = "Please Login First";
 					request.setAttribute("message", message);
