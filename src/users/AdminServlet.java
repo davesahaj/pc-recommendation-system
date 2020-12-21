@@ -138,50 +138,45 @@ public class AdminServlet extends HttpServlet {
 		product.setProduct_brand(brand);
 		product.setProduct_model(model);
 
-		switch (ptype) {
-		case "mb":
+		if (ptype.equals("mb")) {
 			product.setProduct_mb_gpu_chipset(mbChipset);
 			product.setProduct_mb_slot(mbSlots);
 			product.setProduct_mb_cpu_socket(mbSocket);
-			break;
+		}
 
-		case "cpu":
+		else if (ptype.equals("cpu")) {
 			product.setProduct_cores(cpuCores);
 			product.setProduct_speed(cpuSpeed);
 			product.setProduct_mb_cpu_socket(cpuSocket);
-			break;
-		case "cab":
-			break;
+		}
 
-		case "ram":
+		else if (ptype.equals("ram")) {
 			product.setProduct_ram_gpu_storage_size(ramSize);
 			product.setProduct_ram_gpu_type(ramType);
 			product.setProduct_speed(ramSpeed);
-			break;
+		}
 
-		case "gpu":
+		else if (ptype.equals("gpu")) {
 			product.setProduct_speed(gpuSpeed);
 			product.setProduct_mb_gpu_chipset(gpuChipset);
 			product.setProduct_ram_gpu_type(gpuType);
 			product.setProduct_ram_gpu_storage_size(gpuSize);
 			product.setProduct_storage_gpu_interface(gpuInterface);
-			break;
-		case "ssd":
+		}
+
+		else if (ptype.equals("ssd")) {
 			product.setProduct_storage_gpu_interface(ssdInterface);
 			product.setProduct_ram_gpu_storage_size(ssdSize);
+		}
 
-			break;
-		case "hdd":
+		else if (ptype.equals("hdd")) {
 			product.setProduct_storage_gpu_interface(hddInterface);
 			product.setProduct_ram_gpu_storage_size(hddSize);
 			product.setProduct_hdd_rpm(hddSpeed);
-			break;
-		case "psu":
+		} else if (ptype.equals("psu")) {
 			product.setProduct_psu_watts(psuWatts);
 			product.setProduct_psu_efficiency(psuEfficiency);
-			break;
 
-		default:
 		}
 
 		return product;
