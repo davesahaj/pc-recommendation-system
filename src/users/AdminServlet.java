@@ -93,7 +93,7 @@ public class AdminServlet extends HttpServlet {
 
 		System.out.println("making product...");
 
-		Product product = makeProduct(ptype, brand, model, cpuSocket, cpuCores, cpuSpeed, mbChipset, mbSlots, mbSocket,
+		Product product = updateProduct(ptype, brand, model, cpuSocket, cpuCores, cpuSpeed, mbChipset, mbSlots, mbSocket,
 				ramSpeed, ramSize, ramType, gpuChipset, gpuInterface, gpuType, gpuSpeed, gpuSize, psuWatts,
 				psuEfficiency, hddSpeed, hddSize, hddInterface, ssdInterface, ssdSize);
 
@@ -126,7 +126,7 @@ public class AdminServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public Product makeProduct(String ptype, String brand, String model, String cpuSocket, int cpuCores,
+	public Product updateProduct(String ptype, String brand, String model, String cpuSocket, int cpuCores,
 			String cpuSpeed, String mbChipset, int mbSlots, String mbSocket, String ramSpeed, int ramSize,
 			String ramType, String gpuChipset, String gpuInterface, String gpuType, String gpuSpeed, int gpuSize,
 			int psuWatts, String psuEfficiency, int hddSpeed, int hddSize, String hddInterface, String ssdInterface,

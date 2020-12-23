@@ -14,6 +14,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.RequestDispatcher;
 
 import dao.LoginDAO;
+import dao.ProductsDAO;
+import products.PCBuilder;
+import products.Product;
 import products.ProductTracker;
 
 /**
@@ -50,12 +53,26 @@ public class LoginServlet extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
-		/*ProductTracker pt = new ProductTracker();
+
+		/*
+		 * ProductTracker pt = new ProductTracker(); try {
+		 * 
+		 * pt.PriceUpdater(10000002, "amazon"); } catch (SQLException e1) {
+		 * e1.printStackTrace(); }
+		 */
+		/*ProductsDAO Productdao = new ProductsDAO();
+		Product[] products;
 		try {
-		
-			pt.PriceUpdater(10000002, "amazon");
+			products = Productdao.fetchProducts();
+
+			System.out.println(products[0].getProduct_type() + ", " + products[0].getProduct_brand() + ", "
+					+ products[0].getProduct_model());
+			System.out.println(products[1].getProduct_type() + ", " + products[1].getProduct_brand() + ", "
+					+ products[1].getProduct_model());
+			System.out.println(products[2].getProduct_type() + ", " + products[2].getProduct_brand() + ", "
+					+ products[2].getProduct_model());
 		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}*/
 

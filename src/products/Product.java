@@ -18,6 +18,7 @@ public class Product {
 	private int product_psu_watts;
 	private String product_psu_efficiency;
 	private String product_URL;
+	private int product_price;
 
 	// getter-setters
 
@@ -28,7 +29,13 @@ public class Product {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
+	public int getProduct_price() {
+		return product_price;
+	}
 
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
+	}
 	public String getProduct_URL() {
 		return product_URL;
 	}

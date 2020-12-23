@@ -2,9 +2,11 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import products.Product;
+import users.User;
 
 public class ProductsDAO {
 	ConnectionImplementer cni = new ConnectionImplementer();
@@ -20,7 +22,6 @@ public class ProductsDAO {
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			
 
 			System.out.println("####################");
 			System.out.println(product.getProduct_type());
@@ -31,7 +32,7 @@ public class ProductsDAO {
 			ps.setString(3, product.getProduct_model());
 			ps.setString(4, product.getProduct_speed());
 			ps.setInt(5, product.getProduct_cores());
-			//ps.setString(6, product.getProduct_info());
+			// ps.setString(6, product.getProduct_info());
 			ps.setString(6, product.getProduct_mb_gpu_chipset());
 			ps.setInt(7, product.getProduct_mb_slot());
 			ps.setString(8, product.getProduct_mb_cpu_socket());
@@ -41,7 +42,6 @@ public class ProductsDAO {
 			ps.setString(12, product.getProduct_storage_gpu_interface());
 			ps.setInt(13, product.getProduct_psu_watts());
 			ps.setString(14, product.getProduct_psu_efficiency());
-
 
 			System.out.println("executing statement...");
 			ps.executeUpdate();
@@ -54,4 +54,56 @@ public class ProductsDAO {
 		}
 	}
 
+	public Product[] fetchProducts() throws SQLException {
+		String sql = "select * from products";
+
+		cni.loadDriver(ConnectionProvider.dbdriver);
+		Connection con = cni.getConnection();
+
+		PreparedStatement query = con.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		ResultSet result = query.executeQuery();
+
+		if (result.next()) {
+
+			result.last();
+			Product[] products = new Product[result.getRow()];
+			int index = 0;
+			result.first();
+
+			while (result.next()) {
+				Product product = new Product();
+				// user.setUsername(result.getString("username"));
+				product.setProduct_id(result.getInt("product_id"));
+				product.setProduct_type(result.getString("product_type"));
+				product.setProduct_brand(result.getString("product_brand"));
+				product.setProduct_model(result.getString("product_model"));
+				product.setProduct_speed(result.getString("product_ram_cpu_gpu_speed"));
+				product.setProduct_cores(result.getInt("product_cpu_cores"));
+				product.setProduct_info(result.getString("product_info"));
+				product.setProduct_mb_gpu_chipset(result.getString("product_mb_gpu_chipset"));
+				product.setProduct_mb_slot(result.getInt("product_mb_slot"));
+				product.setProduct_mb_cpu_socket(result.getString("product_mb_cpu_socket"));
+				product.setProduct_ram_gpu_storage_size(result.getInt("product_ram_gpu_storage_size"));
+				product.setProduct_ram_gpu_type(result.getString("product_ram_gpu_type"));
+				product.setProduct_hdd_rpm(result.getInt("product_hdd_rpm"));
+				product.setProduct_storage_gpu_interface(result.getString("product_storage_gpu_interface"));
+				product.setProduct_psu_watts(result.getInt("product_psu_watts"));
+				product.setProduct_psu_efficiency(result.getString("product_psu_efficiency"));
+
+				products[index] = product;
+				index++;
+
+			}
+
+			return products;
+
+			// user.setUsername(result.getString("username"));
+
+		}
+
+		con.close();
+
+		return null;
+
+	}
 }
