@@ -30,8 +30,14 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		
+		User user= (User) session.getAttribute("user");
 		session.invalidate();
+		
+		SessionManager Sessionmanager = SessionManager.SessionManager();
+		Sessionmanager.removeUser(user.getUsername());
+		
 
 		response.sendRedirect("home.jsp");
 	}

@@ -1,8 +1,8 @@
 package users;
 
-public class User {
+public class User implements java.io.Serializable {
 
-	private String username, email, password;
+	private String username, email, password, status;
 
 	public String getUsername() {
 		return username;
@@ -28,14 +28,24 @@ public class User {
 		this.password = password;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public User() {
 		super();
 	}
 
-	public User(String username, String email, String password) {
+	public User(String username, String email, String password, String status) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.status = status;
 	}
+
 }

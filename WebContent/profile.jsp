@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" session="false"	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	session="false" pageEncoding="UTF-8"%>
+<%@ page import="users.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 <link rel="stylesheet" href="assets/css/footer.css">
 <link rel="stylesheet" href="assets/css/header.css">
 <link rel="stylesheet" href="assets/css/default.css">
-<link rel="stylesheet" href="assets/css/ReccomsndationProfilePage.css">
+<link rel="stylesheet" href="assets/css/profile.css">
 <link href='https://fonts.googleapis.com/css?family=tittilium'
 	rel='stylesheet'>
 <link
@@ -20,10 +21,32 @@
 <link href='https://fonts.googleapis.com/css?family=BioRhyme'
 	rel='stylesheet'>
 
+
+
+<script defer type="text/javascript">
+	function editprofile() {
+		var x = document.getElementsByClassName("edit");
+		x[0].style.display = "none";
+		var y = document.getElementsByClassName("editform");
+		y[0].style.display = "block";
+
+	}
+
+	function changePassword() {
+		var x = document.getElementsByClassName("edit");
+		x[0].style.display = "none";
+		var y = document.getElementById("e01");
+		y.style.display = "block";
+
+	}
+</script>
+
 </head>
 
 
 <body>
+
+	<!------------------------------------------------------------------------------->
 	<section class="header">
 		<section class="hamburgerbar">
 			<i class="fa fa-bars fa-2x"></i>
@@ -41,48 +64,100 @@
 				<li><a href="aboutus.jsp">About us</a></li>
 				<%
 					HttpSession session = request.getSession(false);
-				if (session != null) {
-					String username = (String) session.getAttribute("user");
-					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
-					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
-				} else {
+
+				if (session == null) {
+
 					String message = "Please Login First";
 					request.setAttribute("message", message);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 					dispatcher.forward(request, response);
-					//response.sendRedirect("login.jsp");
+
 				}
+
+				User user = (User) session.getAttribute("user");
+
+				out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+				out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
 				%>
 
 			</ul>
 		</section>
 	</section>
 
+	<!------------------------------------------------------------------------------->
 	<div class="container">
 		<div class="cover"></div>
 		<div class="mainprofile">
 			<div class="profilepic">
 				<img src="assets/images/profile.jpg">
 			</div>
+
+			<!------------------------------------------------------------------------------->
 			<div class="edit">
-				<button>
-					Edit Profile<i class="fa fa-pencil" aria-hidden="true"></i>
+				<button onclick="editprofile()">
+					Edit Profile <i class="fa fa-pencil" aria-hidden="true"></i>
 				</button>
-				<h1>Abhik Vaghela</h1>
-				<br> <br>
-				<p>
-					<b>About me</b>
-				</p>
-				<br>
-				<p>no personal bio added yet.</p>
-				<br> <br> <span><b>Location: </b>Ahmedabad</span><br>
-				<br> <span><b>Email: </b>abhikvaghela14@gmail.com</span><br>
-				<br> <span><b>Username </b>abhik69</span>
+				</br>
+				<button onclick="changePassword()">
+					Change Password <i class="fa fa-key" aria-hidden="true"></i>
+				</button>
+				<h1>${user.getUsername()}</h1>
+				<br> <br> <br> <span><b>Username: </b><%=user.getUsername() %></span>
+				<br> <span><b>Email: </b><%=user.getEmail() %></span><br>
 			</div>
+			<!------------------------------------------------------------------------------->
+			<div class="editform">
+				<section class="eform">
+					<form action="editProfile" method="post">
+						<input type="hidden" name="editOption" value="editDetails">
+						<table>
+							<tr>
+								<td><label for="aname">User Name: </label></td>
+								<td><input type="text" name="username" value=<%=user.getUsername() %>
+									placeholder=""></td>
+							</tr>
+
+							<tr>
+								<td><label for="pname">Email : </label></td>
+								<td><input type="email" value=<%=user.getEmail() %> name="email"
+									placeholder=""></td>
+							</tr>
+
+						</table>
+						<button type="submit">Update</button>
+					</form>
+				</section>
+			</div>
+
+			<!------------------------------------------------------------------------------->
+			<div class="editform" id="e01" style="display: none">
+				<section class="eform">
+					<form action="editProfile" method="post">
+						<input type="hidden" name="editOption" value="editPassword">
+						<table>
+
+
+							<tr>
+								<td><label for="newpass">New Password: </label></td>
+								<td><input type="text" value="" name="newpassword"
+									placeholder=""></td>
+							</tr>
+
+							<tr>
+								<td><label for="newpass">Confirm New Password: </label></td>
+								<td><input type="text" value="" placeholder=""></td>
+							</tr>
+
+						</table>
+						<button type="submit">Update</button>
+					</form>
+				</section>
+			</div>
+			<!------------------------------------------------------------------------------->
 		</div>
 	</div>
 
-
+	<!------------------------------------------------------------------------------->
 	<section class="footer">
 		<section class="social_links">
 			<i class="fa fa-facebook"></i> <i class="fa fa-instagram"></i> <i

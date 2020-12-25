@@ -44,8 +44,9 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String username = request.getParameter("username");
+		String status = "1";
 
-		User user = new User(username, email, password);
+		User user = new User(username, email, password, status);
 
 		RegisterDAO rdao = new RegisterDAO();
 		String result = rdao.insert(user);

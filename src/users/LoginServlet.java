@@ -60,21 +60,19 @@ public class LoginServlet extends HttpServlet {
 		 * pt.PriceUpdater(10000002, "amazon"); } catch (SQLException e1) {
 		 * e1.printStackTrace(); }
 		 */
-		/*ProductsDAO Productdao = new ProductsDAO();
-		Product[] products;
-		try {
-			products = Productdao.fetchProducts();
-
-			System.out.println(products[0].getProduct_type() + ", " + products[0].getProduct_brand() + ", "
-					+ products[0].getProduct_model());
-			System.out.println(products[1].getProduct_type() + ", " + products[1].getProduct_brand() + ", "
-					+ products[1].getProduct_model());
-			System.out.println(products[2].getProduct_type() + ", " + products[2].getProduct_brand() + ", "
-					+ products[2].getProduct_model());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
+		/*
+		 * ProductsDAO Productdao = new ProductsDAO(); Product[] products; try {
+		 * products = Productdao.fetchProducts();
+		 * 
+		 * System.out.println(products[0].getProduct_type() + ", " +
+		 * products[0].getProduct_brand() + ", " + products[0].getProduct_model());
+		 * System.out.println(products[1].getProduct_type() + ", " +
+		 * products[1].getProduct_brand() + ", " + products[1].getProduct_model());
+		 * System.out.println(products[2].getProduct_type() + ", " +
+		 * products[2].getProduct_brand() + ", " + products[2].getProduct_model()); }
+		 * catch (SQLException e1) { // TODO Auto-generated catch block
+		 * e1.printStackTrace(); }
+		 */
 
 		LoginDAO Logindao = new LoginDAO();
 
@@ -83,10 +81,15 @@ public class LoginServlet extends HttpServlet {
 			User user = Logindao.AuthenticateUser(email, password);
 			String destination = "login.jsp";
 
-			if (user != null) {
+			if (user != null && user.getStatus().equals("1")) {
 				HttpSession session = request.getSession();
-				session.setAttribute("user", user.getUsername());
+				session.setAttribute("user", user);
+								
 				destination = "home.jsp";
+				
+				SessionManager Sessionmanager = SessionManager.SessionManager();
+				Sessionmanager.addUser(user);
+				
 
 			} else {
 				String message = "Invalid email/password";

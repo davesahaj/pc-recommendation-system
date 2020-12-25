@@ -32,6 +32,8 @@ public class LoginDAO {
 			user = new User();
 			user.setUsername(result.getString("username"));
 			user.setEmail(email);
+			user.setPassword(password);
+			user.setStatus(result.getString("status"));
 		}
 
 		con.close();
