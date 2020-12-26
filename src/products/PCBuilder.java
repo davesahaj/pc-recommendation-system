@@ -30,6 +30,14 @@ public class PCBuilder extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		Product[] product = (Product[]) request.getAttribute("product");
+
+		try {
+			recommendationSet(product);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		doGet(request, response);
 	}
 
@@ -38,22 +46,43 @@ public class PCBuilder extends HttpServlet {
 		ProductsDAO Productdao = new ProductsDAO();
 		Product[] products = Productdao.fetchProducts();
 
-		return null;
+		return products;
 
 	}
 
-	String compatibilityChecker()
-	{
-		return null;
+	String compatibilityChecker(Product[] products) {
+		String compatibility = "okay";
+
+		for (Product product : products) {
+			if (!product.getProduct_info().equals("priority:high"))
+				compatibility = "fail " + product.getProduct_id();
+		}
+		return compatibility;
+
 	}
-	
-	void recommendationSet()
-	{
-		
+
+	void recommendationSet(Product[] products) throws SQLException {
+		Product[] productlist = getProducts();
+
+		for (Product product : products) {
+			for (Product dbproduct : productlist) {
+				if (product.getProduct_type() == dbproduct.getProduct_type()) {
+					compatibilityChecker(products);
+				}
+			}
+		}
 	}
-	
-	boolean saveBuild()
-	{
-		return false;
+
+	boolean saveBuild(Product[] products) {
+		try {
+			ProductsDAO Productsdao = new ProductsDAO();
+			for (Product product : products)
+				Productsdao.addProduct(product);
+
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 }
