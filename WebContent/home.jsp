@@ -25,6 +25,10 @@
 	crossorigin="anonymous" />
 <link href="https://fonts.googleapis.com/css?family=BioRhyme"
 	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css"
+	integrity="sha512-MxCUiuI+uAXgr9Z9fxH1Y82CnqRrWySWqHejZyUMW55VJqL4trf9FXM/SiT7NQXZd4H0nJOr6FAAJTEjAmrm+A=="
+	crossorigin="anonymous" />
 </head>
 <body>
 	<section class="header">
@@ -42,15 +46,14 @@
 				<li><a href="aboutus.jsp">About us</a></li>
 				<%
 					HttpSession session = request.getSession(false);
-				
-				if (session != null) {
-					
-					User user =(User) session.getAttribute("user");
 
-					out.print("<li class=user><a href=profile.jsp>" +user.getUsername()+ "</a></li>");
+				if (session != null) {
+
+					User user = (User) session.getAttribute("user");
+
+					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
 					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
-					
-							
+
 				} else {
 					out.print("<li><a href=login.jsp>Log In</a></li>");
 				}

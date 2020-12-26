@@ -1,0 +1,286 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>User Preferences</title>
+      <link rel="stylesheet" href="assets/css/footer.css" />
+      <link rel="stylesheet" href="assets/css/header.css" />
+      <link rel="stylesheet" href="assets/css/default.css" />
+      <link rel="stylesheet" href="assets/css/showcase.css" />
+      <link rel="stylesheet" href="assets/css/offer.css" />
+      <link rel="stylesheet" href="assets/css/webfeatures.css" />
+
+      <link href="https://fonts.googleapis.com/css?family=tittilium" rel="stylesheet" />
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+      <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="./filter.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+      <section class="header">
+        <section class="hamburgerbar">
+          <i class="fa fa-bars fa-2x"></i>
+        </section>
+        <section class="logo-wrapper">
+          <img src="assets/images/logo.png" alt="Recommendation System" />
+        </section>
+
+        <section class="menu-wrapper">
+          <ul>
+            <li><a href="index.html" id="active">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="AboutUs.html">About us</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li class="user"><a href="profile.html">My Profile</a></li>
+          </ul>
+        </section>
+      </section>
+
+
+      <h2 class="display-2" id="custom-build">Choose your Preferences</h2>
+      <h4 class="display-4" id="cat"> for your ${category} PC</h4>
+
+      <form action="" id="custom-form" method="POST">
+
+        <!-------------------------------------------------------------------------------->
+
+        <!--cpu-->
+        <h3 class="display-4 sel1"> ---> Choose a Processor brand</h3>
+        <select name="processorbrand" id="processorbrand" class="dropdown btn btn-primary choices subchoices">
+          <option value="0" class="opts">Select processor brand</option>
+          <option value="intel" class="opts"> Intel </option>
+          <option value="amd" class="opts"> AMD </option>
+        </select>
+
+
+        <!-------------------------------------------------------------------------------->
+
+
+        <!--GPU-->
+        <c:if test="${category == 'gaming' || category == 'designing'}">
+        <h3 class="display-4 sel1"> ---> Select the Intensity of the Graphics Card</h3>
+        <select name="gpu" id="gpu" class="dropdown btn btn-warning choices subchoices">
+          <option value="0" class="opts">choose intensity</option>
+          <option value="1" class="opts"> 1  ( Least intense ) </option>
+          <option value="2" class="opts"> 2 </option>
+          <option value="3" class="opts"> 3</option>
+          <option value="4" class="opts"> 4 </option>
+          <option value="5" class="opts"> 5 ( Most intense ) </option>
+        </select>
+        </c:if>
+
+        <!-------------------------------------------------------------------------------->
+
+
+        <!--RAM-->
+        <c:if test="${category == 'gaming' || category == 'designing' || category == 'workstation'}">
+        <h3 class="display-4 sel1"> ---> Choose the RAM</h3>
+
+        <h3 class="display-4 sel2"> RAM size</h3>
+        <select name="ramsize" class="dropdown btn btn-secondary choices subchoices">
+          <option value="0" class="opts">Select RAM size:</option>
+          <option value="2" class="opts">2 GB</option>
+          <option value="4" class="opts">4 GB</option>
+          <option value="6" class="opts">6 GB</option>
+          <option value="8" class="opts">8 GB</option>
+          <option value="16" class="opts">16 GB</option>
+          <option value="32" class="opts">32 GB</option>
+        </select>
+    </c:if>
+
+        <!-------------------------------------------------------------------------------->
+
+        <!--storage-->
+        <h3 class="display-4 sel1">---> Choose the Storage</h3>
+
+        <h3 class="display-4 sel2"> Storage Type </h3>
+        <select name="ram" class="dropdown btn btn-info choices subchoices">
+          <option value="0" class="opts">Select Storage Type:</option>
+          <option value="hdd" class="opts">HDD ( little slower )</option>
+          <option value="ssd" class="opts">SSD ( somewhat faster )</option>
+        </select>
+
+        <h3 class="display-4 sel2"> Storage size</h3>
+        <select name="gpu" class="dropdown btn btn-info choices subchoices">
+          <option value="0">Select Storage size:</option>
+          <option value="size1" class="opts"> Between 0 - 500 GB </option>
+          <option value="size2" class="opts"> Between 500 GB - 1 TB</option>
+          <option value="size3" class="opts"> Between 1 TB - 5 TB</option>
+          <option value="size4" class="opts"> Between 5 TB - 10 TB</option>
+          <option value="size5" class="opts"> More than 10 TB </option>
+
+        </select>
+
+
+        <!-------------------------------------------------------------------------------->
+
+        <br><br>
+        <button type="submit" class="btn btn-light btn-lg subbtn">Get my Recommendation<svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+          </svg></button>
+      </form>
+
+      <section class="footer">
+        <section class="social_links">
+          <i class="fa fa-facebook"></i>
+          <i class="fa fa-instagram"></i>
+          <i class="fa fa-twitter"></i>
+        </section>
+        <section class="f_info">
+          <section class="f_info1">
+            <h1>Recommendation.com</h1>
+            <h1>About Us</h1>
+            <span>Our website provides best Recommendation</span>
+            <br />
+            <br />
+            <h1>Contact Us</h1>
+            <i class="fa fa-phone" style="margin-right: 10px"></i>&nbsp;<span>+919974435870</span>
+            <br />
+            <i class="fa fa-envelope" style="margin-right: 10px"></i>&nbsp;<span>Recommendation@gmail.com</span>
+          </section>
+
+          <section class="newslatter">
+            <h1>Subscribe to Recommendation@gmail.com</h1>
+            <input type="email" placeholder="Your E-mail Address" />
+            <br />
+            <button onclick="subscribe()">Subscribe</button>
+          </section>
+        </section>
+      </section>
+
+      <script type="text/javascript">
+
+        //for processor
+        function processortype() {
+          let ele = $("#processorbrand").val();
+
+
+          if (ele == 0) {
+            $(".amdpros").show();
+            $(".intelpros").show();
+          }
+          else if (ele == "intel") {
+            $(".amdpros").hide();
+            $(".intelpros").show();
+          }
+          else if (ele == "amd") {
+            $(".intelpros").hide();
+            $(".amdpros").show();
+
+          }
+        }
+
+        //for gpu
+        function gputype() {
+          let ele2 = $("#gpubrand").val();
+
+
+          function hideAll() {
+            $(".zotacgpu").hide();
+            $(".nvidiagpu").hide();
+            $(".msigpu").hide();
+            $(".evgagpu").hide();
+            $(".asusgpu").hide();
+            $(".gigabytegpu").hide();
+          }
+
+          switch (ele2) {
+
+            case 'zotac':
+              hideAll();
+              $(".zotacgpu").show();
+              break;
+
+            case 'nvidia':
+              hideAll();
+              $(".nvidiagpu").show();
+              break;
+
+            case 'msi':
+              hideAll();
+              $(".msigpu").show();
+              break;
+
+            case 'evga':
+              hideAll();
+              $(".evgagpu").show();
+              break;
+
+            case 'asus':
+              hideAll();
+              $(".asusgpu").show();
+              break;
+
+            case 'gigabyte':
+              hideAll();
+              $(".gigabytegpu").show();
+              break;
+
+
+          }
+
+        }
+
+        //for motherboard
+        function mbtype() {
+
+          let ele3 = $("#mbbrand").val();
+
+
+          function hideAll() {
+            $(".asrockmb").hide();
+            $(".msimb").hide();
+            $(".asusmb").hide();
+            $(".gigabytemb").hide();
+          }
+
+          switch (ele3) {
+
+            case 'asrock':
+              hideAll();
+              $(".asrockmb").show();
+              break;
+
+
+            case 'msi':
+              hideAll();
+              $(".msimb").show();
+              break;
+
+            case 'asus':
+              hideAll();
+              $(".asusmb").show();
+              break;
+
+            case 'gigabyte':
+              hideAll();
+              $(".gigabytemb").show();
+              break;
+
+
+          }
+
+        }
+
+
+
+
+      </script>
+
+    </body>
+
+    </html>

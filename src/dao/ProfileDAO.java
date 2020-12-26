@@ -1,4 +1,5 @@
 package dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import users.User;
 public class ProfileDAO {
 	ConnectionImplementer cni = new ConnectionImplementer();
 
-	public User update(User newUser, String userName) throws SQLException{
+	public boolean update(User newUser, String userName) throws SQLException {
 
 		cni.loadDriver(ConnectionProvider.dbdriver);
 		Connection con = cni.getConnection();
@@ -19,20 +20,22 @@ public class ProfileDAO {
 		try {
 			PreparedStatement ss = con.prepareStatement(sql);
 			ss.setString(1, newUser.getEmail());
-			ss.setString(2, newUser.getUsername());
-			ss.setString(3, newUser.getPassword());
+			ss.setString(2, newUser.getPassword());
+			ss.setString(3, newUser.getUsername());
 			ss.setString(4, userName);
 
-			int result = ss.executeUpdate(sql);
-			if (result != 0)
-				return newUser;
+			System.out.println(newUser.getEmail());
+			System.out.println(newUser.getUsername());
+			System.out.println(newUser.getPassword());
+			System.out.println(userName);
+
+			ss.executeUpdate();
+			return true;
 		}
 
 		catch (SQLException e) {
-			return null;
+			return false;
 		}
-
-		return null;
 	}
 
 }

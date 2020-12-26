@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/default.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Recommendation</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./pcbuild.css">
+</head>
+
+<body>
+    <!------------------------------------------>
+    <section class="header">
+        <section class="hamburgerbar">
+            <i class="fa fa-bars fa-2x"></i>
+        </section>
+        <section class="logo-wrapper">
+            <img src="assets/images/logo.png" alt="Recommendation System" />
+        </section>
+
+        <section class="menu-wrapper">
+            <ul>
+                <li><a href="index.html" id="active">Home</a></li>
+                <li><a href="explore.html">Explore</a></li>
+                <li><a href="login.html">Log In</a></li>
+                <li><a href="AboutUs.html">About us</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li class="user"><a href="profile.html">My Profile</a></li>
+            </ul>
+        </section>
+    </section>
+
+    <!------------------------------------------>
+    <section class="main">
+        <section class="search-result">
+            <h1>Recommendation</h1>
+            <section class="books_result">
+                <c:forEach items="${productArray}" var="product" id="all-products">
+
+
+                    <c:if test="${product.product_type == 'cpu'}">
+                        <section class="result">
+                            <img src="" alt="Processor">
+                            <h1>Processor</h1>
+                            <p></p>
+                            <p>Pages: 180</p>
+                            <p>Language: English</p>
+                            <p>Genre: xyz</p>
+                            <a href="" class="button"> know more</a>
+
+                        </section>
+                    </c:if>
+
+                    <c:if test="${product.product_type == 'gpu'}">
+                        <section class="result">
+                            <img src="" alt="Graphics card">
+                            <h1>Graphics card</h1>
+                            <p></p>
+                            <p>Pages: 180</p>
+                            <p>Language: English</p>
+                            <p>Genre: xyz</p>
+                            <a href="" class="button"> know more</a>
+
+                        </section>
+                    </c:if>
+
+                    <c:if test="${product.product_type == 'ram'}">
+                        <section class="result">
+                            <img src="" alt="Ram">
+                            <h1>Ram</h1>
+                            <p></p>
+                            <p>Pages: 180</p>
+                            <p>Language: English</p>
+                            <p>Genre: xyz</p>
+                            <a href="" class="button"> know more</a>
+
+                        </section>
+                    </c:if>
+
+                    <c:if test="${product.product_type == 'mb'}">
+                        <section class="result">
+                            <img src="" alt="MotherBoard">
+                            <h1>MotherBoard</h1>
+                            <p></p>
+                            <p>Pages: 180</p>
+                            <p>Language: English</p>
+                            <p>Genre: xyz</p>
+                            <a href="" class="button"> know more</a>
+
+                        </section>
+                    </c:if>
+
+                    <c:if test="${product.product_type == 'psu'}">
+                        <section class="result">
+                            <img src="" alt="Power Supply">
+                            <h1>Power Supply</h1>
+                            <p></p>
+                            <p>Pages: 180</p>
+                            <p>Language: English</p>
+                            <p>Genre: xyz</p>
+                            <a href="" class="button"> know more</a>
+
+                        </section>
+                    </c:if>
+
+                    <c:if test="${product.product_type == 'cab'}">
+                        <section class="result">
+                            <img src="" alt="Cabinet">
+                            <h1>Cabinet</h1>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <a href="" class="button"> know more</a>
+
+                        </section>
+                    </c:if>
+
+
+
+                </c:forEach>
+
+
+
+            </section>
+        </section>
+    </section>
+
+    <!------------------------------------------>
+    <section class="footer">
+        <section class="social_links">
+            <i class="fa fa-facebook"></i> <i class="fa fa-instagram"></i> <i class="fa fa-twitter"></i>
+        </section>
+        <section class="f_info">
+            <section class="f_info1">
+                <h1>About Us</h1>
+                <span> Builts by Price </span>| <span> Parts </span>| <span>
+                    Game Criteria </span>| <span> Prebuilts Recommendations </span> <br>
+                <br>
+                <h1>Contact Us</h1>
+                <i class="fa fa-phone" style="margin-right: 10px"></i>&nbsp;<span>+919974435870</span>
+                <br> <i class="fa fa-envelope"
+                    style="margin-right: 10px"></i>&nbsp;<span>Recommendation@gmail.com</span>
+
+            </section>
+
+            <section class="newslatter">
+                <h1>Subscribe for NewsLetters</h1>
+                <input type="email" placeholder="Your E-mail Address"> <br>
+                <button onclick="subscribe()">Subscribe</button>
+            </section>
+        </section>
+    </section>
+    <!------------------------------------------>
+
+</body>
+
+</html>

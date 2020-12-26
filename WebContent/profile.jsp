@@ -108,7 +108,7 @@
 			<!------------------------------------------------------------------------------->
 			<div class="editform">
 				<section class="eform">
-					<form action="editProfile" method="post">
+					<form action="ProfileServlet" method="post">
 						<input type="hidden" name="editOption" value="editDetails">
 						<table>
 							<tr>
@@ -132,7 +132,7 @@
 			<!------------------------------------------------------------------------------->
 			<div class="editform" id="e01" style="display: none">
 				<section class="eform">
-					<form action="editProfile" method="post">
+					<form action="ProfileServlet" method="post">
 						<input type="hidden" name="editOption" value="editPassword">
 						<table>
 

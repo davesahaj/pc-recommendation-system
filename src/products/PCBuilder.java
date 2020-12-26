@@ -42,4 +42,18 @@ public class PCBuilder extends HttpServlet {
 
 	}
 
+	String compatibilityChecker()
+	{
+		return null;
+	}
+	
+	void recommendationSet()
+	{
+		
+	}
+	
+	boolean saveBuild()
+	{
+		return false;
+	}
 }

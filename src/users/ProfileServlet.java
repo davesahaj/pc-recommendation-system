@@ -41,26 +41,19 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
-		// option for edit details or change password
+		HttpSession session = request.getSession();
+
+		User user = (User) session.getAttribute("user");
+		String username = user.getUsername();
+
 		String option = request.getParameter("editOption");
 
-		// newinfo is new info taken from form
-
-		// old info is current user info needed for updation query
-		HttpSession session = request.getSession();
-		String userName = (String) session.getAttribute("user");
-
-		SessionManager Sessionmanager = SessionManager.SessionManager();
-		User user = Sessionmanager.getUser(userName);
-		
-
 		if (option.equalsIgnoreCase("editDetails")) {
-			
+
 			String newUserName = request.getParameter("username");
 			String newEmail = request.getParameter("email");
-			
+
 			user.setUsername(newUserName);
 			user.setEmail(newEmail);
 
@@ -75,14 +68,16 @@ public class ProfileServlet extends HttpServlet {
 		try {
 
 			ProfileDAO Profiledao = new ProfileDAO();
-			
-			User result = Profiledao.update(user,userName);
 
-			if (result!=null) {
-				Sessionmanager.removeUser(userName);
-				Sessionmanager.addUser(result);
-				
-				session.setAttribute("user", result.getUsername());
+			boolean result = Profiledao.update(user, username);
+
+			if (result) {
+				SessionManager Sessionmanager = SessionManager.SessionManager();
+				Sessionmanager.removeUser(username);
+				Sessionmanager.addUser(user);
+
+				session.setAttribute("user", user);
+
 			} else {
 				System.out.println("user update failed");
 			}

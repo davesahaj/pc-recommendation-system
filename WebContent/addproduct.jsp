@@ -1,4 +1,5 @@
 <!--<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>-->
+<%@ page import="users.User"%>
 
 <!DOCTYPE html>
 <html>
@@ -44,18 +45,22 @@
 				<li><a href="aboutus.jsp">About us</a></li>
 				<%
 					HttpSession session = request.getSession(false);
-				if (session != null && ((String) session.getAttribute("user")).equals("admin")) {
-
-					String username = (String) session.getAttribute("user");
-
-					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
-					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
-				} else {
-
-					RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-					dispatcher.forward(request, response);
+				if (session == null) {
+					
+					response.sendRedirect(request.getContextPath() + "/home");
+					
 
 				}
+				
+				User user = (User) session.getAttribute("user");
+
+				if(!user.getUsername().equals("admin"))
+				{
+					response.sendRedirect(request.getContextPath() + "/home");
+				}
+
+				out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+				out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
 				%>
 
 			</ul>

@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
 								
-				destination = "home.jsp";
+				destination = "/home";
 				
 				SessionManager Sessionmanager = SessionManager.SessionManager();
 				Sessionmanager.addUser(user);
@@ -99,6 +99,8 @@ public class LoginServlet extends HttpServlet {
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
 			dispatcher.forward(request, response);
+			
+			//response.sendRedirect(request.getContextPath() + destination);
 		} catch (SQLException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
 		}

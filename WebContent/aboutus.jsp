@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	session="false" pageEncoding="UTF-8"%>
+<%@ page import="users.User"%>
 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +45,15 @@
 				<li><a href="aboutus.jsp" id="active">About us</a></li>
 				<%
 					HttpSession session = request.getSession(false);
+				
 				if (session != null) {
-					String username = (String) session.getAttribute("user");
-					out.print("<li class=user><a href=profile.jsp>" + username + "</a></li>");
-					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
+					
+					User user =(User) session.getAttribute("user");
 
+					out.print("<li class=user><a href=profile.jsp>" +user.getUsername()+ "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
+					
+							
 				} else {
 					out.print("<li><a href=login.jsp>Log In</a></li>");
 				}
