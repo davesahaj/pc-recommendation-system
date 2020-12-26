@@ -1,7 +1,7 @@
 # PC Recommendation System
-> A Java Enterprise Website to help you build the PC of your dreams without hassle.
+> A Java Enterprise Website to help you build the PC of your dreams without hassle. This system allows non-technical users to recommend the best customised parts and components for their PC. The system uses various algorithms to determine the compatibility among parts, optimal performance combination among them and provide Amazon links for easy purchase based on customer budget and needs.
 
-## Development setup
+## Development and Usage setup
 
 Clone the repo and deploy it on heroku. You might want to add your own postres implementation.
 
