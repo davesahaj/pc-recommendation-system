@@ -5,14 +5,16 @@
 ## Development and Usage
 
 Clone the repo and deploy it on any PaaS (heroku recommended). You might want to add *your own postres implementation*.
-> The project has implemented MVC Development, The structure hence is divided into core modules, presentation, and the data objects. The system is hosted on Heroku EU region with the standard Dyno formation along with a postgreSQL service add-on which acts as the primary Database for the system. A single Connection Provider handles the data access of entire system, DAO(Data Access Objects) of their respective modules are given flexibility to fetch and update DB accordingly. PCBuilder allows the system to check for the compatibility and generate a recommendation set of optimal components, Product Tracker periodically fetches the price data and updates the details into the database. Session Manager handles all the operations concerning logged in users. Various Servlets are used to carry out intractive tasks like logging in and out of the system,changing profile details, browsing through the system, registration, Admin with special privileges can add new products right from the system. 
+> The project has implemented MVC Development, The structure hence is divided into core modules, presentation, and the data objects. The system is hosted on Heroku EU region with the standard Dyno formation along with a postgreSQL service add-on which acts as the primary Database for the system. A single Connection Provider handles the data access of entire system, DAO(Data Access Objects) of their respective modules are given flexibility to fetch and update DB accordingly. PCBuilder allows the system to check for the compatibility and generate a recommendation set of optimal components, Product Tracker periodically fetches the price data and updates the details into the database. Session Manager handles all the operations concerning logged in users. Various Servlets are used to carry out intractive tasks like logging in and out of the system,changing profile details, browsing through the system, registration, Admin with special privileges can add new products right from the system. JSP files are used to build the presentation tier. 
 
 
 ## Release History
 
+* Current Build:
+   * V50
 
-* 0.0.1
-    * Work in progress ***https://pc-recommendation-system.herokuapp.com***
+* 48.1
+    *  ***https://pc-recommendation-system.herokuapp.com***
 
 
 ## Meta
