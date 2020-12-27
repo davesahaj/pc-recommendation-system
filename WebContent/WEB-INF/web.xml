@@ -30,6 +30,11 @@
 		<servlet-class>users.ProfileServlet</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>PCBuilder</servlet-name>
+		<servlet-class>product.PCBuilder</servlet-class>
+	</servlet>
+
 
 	<servlet>
 		<servlet-name>Home</servlet-name>
@@ -80,6 +85,10 @@
 		<servlet-name>Profile</servlet-name>
 		<url-pattern>/Profile</url-pattern>
 	</servlet-mapping>
+
+	<listener>
+		<listener-class>products.ProductTracker</listener-class>
+	</listener>
 
 
 </web-app>

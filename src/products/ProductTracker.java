@@ -2,6 +2,12 @@ package products;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,8 +16,27 @@ import org.jsoup.select.Elements;
 
 import dao.ProductTrackerDAO;
 
-public class ProductTracker {
+public class ProductTracker implements ServletContextListener {
 
+	//private ScheduledExecutorService scheduler;
+
+	@Override
+	public void contextDestroyed(ServletContextEvent event) {
+		System.out.println("Prices updation stopped");
+	}
+
+	@Override
+	public void contextInitialized(ServletContextEvent event) {
+		System.out.println("Price Updation started");
+
+		/*scheduler = Executors.newSingleThreadScheduledExecutor();
+		scheduler.scheduleAtFixedRate(new Updater(), 0, 1, TimeUnit.HOURS);*/
+
+	}
+
+}
+
+class Updater implements Runnable {
 	public int sanatizePriceData(String price) {
 
 		char[] digits = price.toCharArray();
@@ -63,12 +88,17 @@ public class ProductTracker {
 	}
 
 	public void PriceUpdater(int id, String platform) throws SQLException {
-		
+
 		int price = PriceFetcher(id, platform);
 		ProductTrackerDAO Producttrackerdao = new ProductTrackerDAO();
 		Producttrackerdao.setPrice(id, price, platform);
 
+	}
+
+	@Override
+	public void run() {
 		
 		
 	}
+
 }

@@ -66,7 +66,7 @@ public class ProductsDAO {
 		if (result.next()) {
 
 			result.last();
-			Product[] products = new Product[result.getRow()];
+			Product[] products = new Product[result.getRow()-1];
 			int index = 0;
 			result.first();
 

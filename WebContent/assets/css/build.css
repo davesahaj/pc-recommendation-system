@@ -1,0 +1,101 @@
+
+.bcontainer
+{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+    justify-content: center;
+}
+
+.bcontainer button
+{
+  padding:10px 20px;
+  background-color: grey;
+  color:black;
+  border-radius:6px;
+  width: 20%;
+  text-align:center;
+  font-size:23px;
+  margin:20px 0px;
+}
+
+.bcontainer .title
+{
+    height: 150px;
+    display: flex;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url("../images/Banner.jpg");
+    background-position: center;
+    
+}
+.title h1
+{
+    color: white;
+    font-weight: 100;
+}
+.cards
+{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 0px;
+}
+
+.card
+{
+    
+    height: auto;
+    padding-top: 10px 0px;
+    width:25%;
+    background-color: #3a3939;
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+}
+
+.card:hover
+{
+ 
+    box-shadow:
+    0 0 6px 3px rgb(58, 58, 58),  /* inner white */
+    0 0 10px 6px rgb(131, 131, 131), /* middle magenta */
+    0 0 18px 9px rgb(175, 175, 175);
+    transition: 0.5s ease-in-out;
+}
+.card img
+{
+    height: 100px;
+    width: auto;
+    margin: 10px;
+}
+
+.card h1,p,a
+{
+    color: white;
+    margin-top: 20px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.card a
+{
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+.card a:hover
+{
+    color: white;
+    background-color: blue;
+    transition: 0.2s ease-in;
+}

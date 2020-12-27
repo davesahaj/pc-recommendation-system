@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="false"%>
-<%@ page import="users.User"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="assets/css/showcase.css" />
 <link rel="stylesheet" href="assets/css/offer.css" />
 <link rel="stylesheet" href="assets/css/webfeatures.css" />
+<link rel="stylesheet" href="assets/css/ReccomsndationProfilePage.css" />
 <link rel="stylesheet" href="assets/css/category.css" />
 
 <link href="https://fonts.googleapis.com/css?family=tittilium"
@@ -26,13 +27,17 @@
 <link href="https://fonts.googleapis.com/css?family=BioRhyme"
 	rel="stylesheet" />
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css"
-	integrity="sha512-MxCUiuI+uAXgr9Z9fxH1Y82CnqRrWySWqHejZyUMW55VJqL4trf9FXM/SiT7NQXZd4H0nJOr6FAAJTEjAmrm+A=="
-	crossorigin="anonymous" />
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
 
 </head>
 
 <body>
+	<!-- 
+  Page Tag
+   -->
+
 	<section class="header">
 		<section class="hamburgerbar">
 			<i class="fa fa-bars fa-2x"></i>
@@ -43,34 +48,24 @@
 
 		<section class="menu-wrapper">
 			<ul>
-				<li><a href="home.jsp" id="active">Home</a></li>
-				<li><a href="explore.jsp">Explore</a></li>
-				<li><a href="aboutus.jsp">About us</a></li>
-				<%
-					HttpSession session = request.getSession(false);
-
-				if (session != null) {
-
-					User user = (User) session.getAttribute("user");
-
-					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
-					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
-
-				} else {
-					out.print("<li><a href=login.jsp>Log In</a></li>");
-				}
-				%>
-
+				<li><a href="index.html" id="active">Home</a></li>
+				<li><a href="explore.html">Explore</a></li>
+				<li><a href="login.html">Log In</a></li>
+				<li><a href="AboutUs.html">About us</a></li>
+				<li><a href="donate.html">Donate</a></li>
+				<li class="user"><a href="profile.html">My Profile</a></li>
 			</ul>
 		</section>
 	</section>
 
 	<div class="choose-category-page">
 
-		<form action="" method="POST" id="category-form">
+		<form action="PCBuilder" method="POST" id="category-form">
 
-			<h1 class="display-4 lead text-left mt-5 text-white">Select a category that defines you best</h1>
+			<h1 class="display-4 lead text-left mt-5 text-white">Why do you
+				want a pc ?</h1>
 			<div id="categories">
+
 				<section>
 					<input type="radio" id="check_1" name="category" value="casual">
 					<label for="check_1"><svg width="1em" height="1em"
@@ -130,19 +125,21 @@
         </svg> Custom build</label>
 				</section>
 
-
-
 			</div>
 
 			<h1 class="display-4 lead text-left mt-5 text-white">What is
 				your PC budget ?</h1>
-			<input type="number" name="price" id="budget"
-				placeholder="   Enter your budget">
-
+			<input id="slider1" name="budget" type="range" min="25000"
+				max="250000" step="10000" />
+				
+			<p id="demop">
+				Rupees: <span id="demo"></span>
+			</p>
+			
 			<button type="submit" id="submit-btn" form="category-form"
-				value="category" class="btn btn-primary btn-lg">Proceed</button>
+				value="category" class="btn btn-primary btn-lg">Next Step</button>
 
-
+			<input type="hidden" name="BuilderPageType" value="categorypage">
 		</form>
 
 	</div>
@@ -169,5 +166,16 @@
 			</section>
 		</section>
 	</section>
+
+
+	<script>
+		var slider = document.getElementById("slider1");
+		var output = document.getElementById("demo");
+		output.innerHTML = slider.value;
+
+		slider.oninput = function() {
+			output.innerHTML = this.value;
+		}
+	</script>
 </body>
 </html>

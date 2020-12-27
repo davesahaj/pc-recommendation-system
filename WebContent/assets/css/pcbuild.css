@@ -1,0 +1,78 @@
+
+        * {
+            box-sizing: border-box;
+            margin: 0px 0px;
+
+            font-family: arial;
+        }
+
+
+        .search-result {
+            display: none;
+            flex: 1;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border: 1px solid rgb(138, 138, 138);
+            box-shadow: 5px 5px 5px rgb(138, 138, 138);
+            padding: 10px;
+        }
+
+
+        .main {
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+
+        .books_result {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+
+        .result {
+
+            height: 200px;
+            width: 47%;
+            border: 1px solid rgb(177, 176, 176);
+            margin-left: 10%;
+            margin-top: 3%;
+
+        }
+
+        .result img {
+            box-shadow: 5px 5px 5px rgb(197, 197, 197);
+            height: 180px;
+            width: auto;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .result h1 {
+            font-size: 20px;
+            margin-left: 30%;    
+        }
+        .result p {
+            font-size: 20px;
+            margin-left: 30%;
+        }
+  
+        #all-products{
+            width: 100%;
+            height: auto;
+        }
+
+        a.button {
+            appearance: button;
+            text-decoration: none;
+            background-color: rgb(255, 255, 100);
+            color: black;
+            font-size: 130%;
+            margin-left: 50%;
+            padding: 3px;
+            border-radius: 05rem;
+            width: 15%;
+        }
