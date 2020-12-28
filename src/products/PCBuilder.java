@@ -42,19 +42,93 @@ public class PCBuilder extends HttpServlet {
 
 			int budget = Integer.parseInt(request.getParameter("budget"));
 			String category = request.getParameter("category");
-			
+
 			if (!category.equals("custom"))
 				message = "choose the components you already have, or skip this step";
 
 			request.setAttribute("budget", budget);
 			request.setAttribute("category", category);
 			request.setAttribute("message", message);
-		} else {
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("filter.jsp");
+			dispatcher.forward(request, response);
 
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("filter.jsp");
-		dispatcher.forward(request, response);
+		else {
+			String category = request.getParameter("category");
+			int budget = Integer.parseInt(request.getParameter("budget"));
+
+			ArrayList<String> budgetSet = new ArrayList<String>();
+
+			int cpuPriority = 1;
+			int mbPriority = 1;
+			int cabPriority = 1;
+			int ramPriority = 1;
+			int psuPriority = 1;
+			int hddPriority = 1;
+			int ssdPriority = 0;
+			int gpuPriority = 0;
+
+			if (category.equals("casual")) {
+
+				int movieScale = Integer.parseInt(request.getParameter("casualMovieSlider"));
+				int officescale = Integer.parseInt(request.getParameter("casualOfficeSlider"));
+				int internetScale = Integer.parseInt(request.getParameter("casualInternetSlider"));
+
+				cpuPriority = (int) (cpuPriority * movieScale * 0.5);
+				cpuPriority = (int) (cpuPriority * internetScale * 0.3);
+				ramPriority = (int) (ramPriority * internetScale * 0.8);
+
+				budgetSet.add("cpu");
+				budgetSet.add("ram");
+				budgetSet.add("hdd");
+				budgetSet.add("mb");
+			}
+
+			else if (category.equals("gaming")) {
+				String[] games = request.getParameterValues("games");
+				// csgo,cyberpunk,gta,creed,farcry,hitman,cuphead,pubg
+				int gamingHoursSlider = Integer.parseInt(request.getParameter("gamingHoursSlider"));
+				int gamingPQSlider = Integer.parseInt(request.getParameter("gamingPQSlider"));
+
+			}
+
+			else if (category.equals("designing")) {
+
+				String[] designSoftware = request.getParameterValues("designSoftware");
+				String[] designWork = request.getParameterValues("designWork");
+				int designHoursSlider = Integer.parseInt(request.getParameter("designHoursSlider"));
+			}
+
+			else if (category.equals("workstation")) {
+				cpuPriority = 10;
+				mbPriority = 10;
+				cabPriority = 5;
+				ramPriority = 10;
+				psuPriority = 10;
+				hddPriority = 0;
+				ssdPriority = 10;
+				gpuPriority = 10;
+			}
+
+			else if (category.equals("custom")) {
+
+			}
+
+			recommendationSet(
+					cpuPriority,
+					mbPriority,
+					cabPriority,
+					ramPriority,
+					psuPriority,
+					hddPriority,
+					ssdPriority,
+					gpuPriority,
+					budgetSet
+					);
+
+		}
 
 		doGet(request, response);
 	}
@@ -72,19 +146,10 @@ public class PCBuilder extends HttpServlet {
 		return null;
 	}
 
-	void recommendationSet() {
-
-		Product motherboard = new Product();
-		motherboard.setProduct_type("mb");
-		motherboard.setProduct_price(7500);
-
-		Product ram = new Product();
-		ram.setProduct_type("ram");
-		ram.setProduct_price(4000);
-
-		Product gpu = new Product();
-		gpu.setProduct_type("gpu");
-		gpu.setProduct_price(14000);
+	void recommendationSet(int cpuPriority, int mbPriority, int cabPriority, int ramPriority, int psuPriority,
+			int hddPriority, int ssdPriority, int gpuPriority, ArrayList<String> budgetSet) {
+		
+		
 
 	}
 

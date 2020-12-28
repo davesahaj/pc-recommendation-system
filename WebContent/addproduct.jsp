@@ -46,29 +46,28 @@
 				<%
 					HttpSession session = request.getSession(false);
 				if (session == null) {
-					
+
 					response.sendRedirect(request.getContextPath() + "/home");
-					
 
+				} else {
+					User user = (User) session.getAttribute("user");
+
+					if (!user.getUsername().equals("admin")) {
+						response.sendRedirect(request.getContextPath() + "/home");
+					}
+
+					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
 				}
-				
-				User user = (User) session.getAttribute("user");
-
-				if(!user.getUsername().equals("admin"))
-				{
-					response.sendRedirect(request.getContextPath() + "/home");
-				}
-
-				out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
-				out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
 				%>
 
 			</ul>
 		</section>
 	</section>
 
-	<div class="container">
+	<div class="container p-4">
 
+<h2>Add Products</h2>
 		${message}
 
 

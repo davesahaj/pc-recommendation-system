@@ -1,5 +1,5 @@
 package dao;
-
+//{"amazon": {"url": "https://www.amazon.in/dp/B0815JJQQ8", "price": ""}, "flipkart": {"url": "www.flipkart.com", "price": "1203"}}
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,13 +19,9 @@ public class ProductsDAO {
 				+ "product_cpu_cores,product_mb_gpu_chipset,product_mb_slot,product_mb_cpu_socket"
 				+ ",product_ram_gpu_storage_size,product_ram_gpu_type,product_hdd_rpm,product_storage_gpu_interface"
 				+ ",product_psu_watts,product_psu_efficiency)  " + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-
+		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-
-			System.out.println("####################");
-			System.out.println(product.getProduct_type());
-			System.out.println("####################");
 
 			ps.setString(1, product.getProduct_type());
 			ps.setString(2, product.getProduct_brand());
@@ -43,7 +39,10 @@ public class ProductsDAO {
 			ps.setInt(13, product.getProduct_psu_watts());
 			ps.setString(14, product.getProduct_psu_efficiency());
 
-			System.out.println("executing statement...");
+			ps.executeUpdate();
+			
+			sql = "INSERT INTO productprice (product_price) values('{\"amazon\":{\"url\":\""+product.getProduct_URL()+"\",\"price\":\"\"},\"flipkart\":{\"url\":\"www.flipkart.com\",\"price\":\"\"}}')";
+			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
 
 			System.out.println("Added product...");

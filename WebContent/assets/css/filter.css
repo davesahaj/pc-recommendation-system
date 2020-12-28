@@ -1,4 +1,97 @@
-.sel1{
+body
+{
+    background-color: #474747;
+}
+.fcontainer
+{
+    background-color: black;
+    margin: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    width:auto;
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fcontainer .categories h1
+{
+    font-weight: 100;
+    color: white;
+    
+    margin: 10px 30px;
+    border-bottom: 2px solid grey;
+}
+
+
+
+.categories .cat
+{
+    color: white;
+    background-color: rgb(72, 0, 90);
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 10px 30px;
+    font-size: 22px;
+   
+}
+
+.question
+{
+    width: 500px;
+    margin: 20px 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(71, 71, 71);
+}
+ 
+  .question h2
+  {
+      color: white;
+      font-weight: 100;
+      margin: 10px 30px;
+      width:400px;
+  }
+
+  .questions h2
+  {
+     font-weight: 100;
+     width: 500px;
+     color: white;
+     margin: 10px 30px;
+     
+  }
+
+  .btn
+  {
+      padding: 10px 20px;
+      color: black;
+      background-color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 23px;
+      margin: 10px 30px;
+  }
+
+  .ch
+  {
+      padding: 0px;
+      border-radius: 10px;
+      margin-left: 30px;
+  }
+
+  .gaming
+  {
+      width: 90%;
+  }
+
+  .software
+  {
+      width: 90%;
+  }
+
+  /*----------------------------------------*/
+
+  .sel1{
     margin-top: 7%;
 }
 
@@ -30,7 +123,7 @@
 
 .opts{
   background-color: white;
-  color: black;
+  color: rgb(255, 255, 255);
   
 }
 
@@ -43,4 +136,40 @@
   margin-left:50% ;
   font-size: 175%;
   margin-bottom: 10%;
+}
+
+.custom
+{
+    color: white;
+}
+
+.custom h3
+{
+   font-weight: 100;
+   font-size: 25px;
+   margin-left: 6%;
+}
+
+.custom select
+{
+    background-color:rgb(188, 190, 209);
+    font-size: 20px;
+    margin-left: 6%;
+    padding: 15px 30px;
+}
+
+.custom option
+{
+    color: black;
+}
+
+
+#custom-build
+{
+    font-weight: 100;
+    font-size: 40px;
+    background-color: rgb(104, 2, 104);
+    width: 40%;
+    padding: 5px 10px;
+    border-radius: 10px;
 }

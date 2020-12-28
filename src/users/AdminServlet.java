@@ -52,6 +52,7 @@ public class AdminServlet extends HttpServlet {
 		String ptype = request.getParameter("productType");
 		String brand = request.getParameter("brandType");
 		String model = request.getParameter("modeltype");
+		String pURL = request.getParameter("pURL");
 
 		// CPU
 		String cpuSocket = request.getParameter("cpuSocket");
@@ -91,13 +92,10 @@ public class AdminServlet extends HttpServlet {
 
 		// build Product
 
-		System.out.println("making product...");
-
-		Product product = updateProduct(ptype, brand, model, cpuSocket, cpuCores, cpuSpeed, mbChipset, mbSlots, mbSocket,
-				ramSpeed, ramSize, ramType, gpuChipset, gpuInterface, gpuType, gpuSpeed, gpuSize, psuWatts,
+		Product product = updateProduct(ptype, brand, model,pURL, cpuSocket, cpuCores, cpuSpeed, mbChipset, mbSlots,
+				mbSocket, ramSpeed, ramSize, ramType, gpuChipset, gpuInterface, gpuType, gpuSpeed, gpuSize, psuWatts,
 				psuEfficiency, hddSpeed, hddSize, hddInterface, ssdInterface, ssdSize);
 
-		System.out.println("Connecting to DAO...");
 		ProductsDAO productsDAO = new ProductsDAO();
 
 		try {
@@ -110,7 +108,7 @@ public class AdminServlet extends HttpServlet {
 				message = "<div class=\"alert alert-success\" role=\"alert\"><strong>done!</strong> The data has been added.</div>";
 
 			} else {
-				message = "<div class=\"alert alert-danger\" role=\"alert\"><strong>done!</strong> The data has been added.</div>";
+				message = "<div class=\"alert alert-danger\" role=\"alert\"><strong>done!</strong> An error occured. Please try later.</div>";
 
 			}
 
@@ -126,7 +124,7 @@ public class AdminServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public Product updateProduct(String ptype, String brand, String model, String cpuSocket, int cpuCores,
+	public Product updateProduct(String ptype, String brand, String model, String pURL,String cpuSocket, int cpuCores,
 			String cpuSpeed, String mbChipset, int mbSlots, String mbSocket, String ramSpeed, int ramSize,
 			String ramType, String gpuChipset, String gpuInterface, String gpuType, String gpuSpeed, int gpuSize,
 			int psuWatts, String psuEfficiency, int hddSpeed, int hddSize, String hddInterface, String ssdInterface,
@@ -137,6 +135,7 @@ public class AdminServlet extends HttpServlet {
 		product.setProduct_type(ptype);
 		product.setProduct_brand(brand);
 		product.setProduct_model(model);
+		product.setProduct_URL(pURL);
 
 		if (ptype.equals("mb")) {
 			product.setProduct_mb_gpu_chipset(mbChipset);
