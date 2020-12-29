@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	session="false" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>
+<%@ page import="users.User"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +16,14 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<title>Filter</title>
+<title>Customise</title>
 
 
 </head>
 
 
 <body>
+	<div id="overlay"></div>
 	<!------------------------------------------>
 	<section class="header">
 		<section class="hamburgerbar">
@@ -36,12 +37,21 @@
 
 		<section class="menu-wrapper">
 			<ul>
-				<li><a href="home.jsp">Home</a></li>
+				<li><a href="home.jsp" id="active">Home</a></li>
+				<li><a href="#">Explore</a></li>
+				<li><a href="aboutus.jsp">About us</a></li>
+				<%
+					HttpSession session = request.getSession(false);
+				if (session == null) {
+					response.sendRedirect(request.getContextPath() + "/home");
 
-				<li><a href="login.jsp">Log In</a></li>
+				} else {
+					User user = (User) session.getAttribute("user");
+					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
+				}
+				%>
 
-				<li class="user"><a href="profile.jsp" id="active">My
-						Profile</a></li>
 			</ul>
 		</section>
 	</section>
@@ -52,7 +62,7 @@
 		<div class="categories">
 			<h1>Choose Your Preferences</h1>
 			</br>
-			<form action="PcBuild" method="POST">
+			<form action="PCBuilder" method="POST" onsubmit="turnon()">
 				<!--Gaming pc----------------------------------------->
 				<div class="gaming" id="gaming">
 					<span class="cat">Gaming</span>
@@ -260,15 +270,15 @@
 						<!--Slider code------------------------------->
 						<div class="choice">
 							<ul>
-								<li><input type="checkbox" class="ch" id="tb1" name="designWork"
-									value="professional" /> <label for="tb1" class="ch"><p
-											class="btn">Professional Designer</p></label></li>
-								<li><input type="checkbox" class="ch" id="tb2" name="designWork"
-									value="adept" /> <label for="tb2" class="ch"><p
+								<li><input type="checkbox" class="ch" id="tb1"
+									name="designWork" value="professional" /> <label for="tb1"
+									class="ch"><p class="btn">Professional Designer</p></label></li>
+								<li><input type="checkbox" class="ch" id="tb2"
+									name="designWork" value="adept" /> <label for="tb2" class="ch"><p
 											class="btn">Freelance Artist</p></label></li>
-								<li><input type="checkbox" class="ch" id="tb3" name="designWork"
-									value="novice" /> <label for="tb3" class="ch"><p
-											class="btn">Beginner</p></label></li>
+								<li><input type="checkbox" class="ch" id="tb3"
+									name="designWork" value="novice" /> <label for="tb3"
+									class="ch"><p class="btn">Beginner</p></label></li>
 							</ul>
 						</div>
 					</div>
@@ -298,7 +308,7 @@
 				<!--------Custom built------------------------------------------------->
 				<div class="custom" id="custom">
 					<h2 class="display-2" id="custom-build">Customize Your PC</h2>
-					
+
 					<!--cpu-->
 					<h3 class="display-4 sel1">1. Choose a Processor brand</h3>
 					<select name="processorbrand" id="processorbrand"
@@ -485,6 +495,10 @@
 				<button type="submit" class="btn">
 					Generate Your Build <i class="fa fa-chevron-right"></i>
 				</button>
+
+				<input type="hidden" name="BuilderPageType" value="preferencespage">
+				<input type="hidden" name="budget" value="${budget}"> <input
+					type="hidden" name="category" value="${category}">
 			</form>
 		</div>
 	</div>
@@ -539,7 +553,7 @@
 		}
 		hideAll();
 		//take category from backend
-		var category = "gaming";
+		let category = "${category}";
 
 		function showCategory(cat) {
 			switch (cat) {
@@ -567,6 +581,10 @@
 		showCategory(category);
 
 		// slider management
+
+		function turnon() {
+			document.getElementById("overlay").style.display = "block";
+		}
 	</script>
 
 </body>

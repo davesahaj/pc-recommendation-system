@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>
+<%@ page import="users.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Choose Category</title>
+<title>Choose a Category</title>
 <link rel="stylesheet" href="assets/css/footer.css" />
 <link rel="stylesheet" href="assets/css/header.css" />
 <link rel="stylesheet" href="assets/css/default.css" />
@@ -34,6 +34,8 @@
 </head>
 
 <body>
+
+ <div id="overlay">Please Wait</div> 
 	<!-- 
   Page Tag
    -->
@@ -48,19 +50,28 @@
 
 		<section class="menu-wrapper">
 			<ul>
-				<li><a href="index.html" id="active">Home</a></li>
-				<li><a href="explore.html">Explore</a></li>
-				<li><a href="login.html">Log In</a></li>
-				<li><a href="AboutUs.html">About us</a></li>
-				<li><a href="donate.html">Donate</a></li>
-				<li class="user"><a href="profile.html">My Profile</a></li>
+				<li><a href="home.jsp" id="active">Home</a></li>
+				<li><a href="#">Explore</a></li>
+				<li><a href="aboutus.jsp">About us</a></li>
+				<%
+					HttpSession session = request.getSession(false);
+				if (session == null) {
+					response.sendRedirect(request.getContextPath() + "/home");
+
+				} else {
+					User user = (User) session.getAttribute("user");
+					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
+				}
+				%>
+
 			</ul>
 		</section>
 	</section>
 
 	<div class="choose-category-page">
 
-		<form action="PCBuilder" method="POST" id="category-form">
+		<form action="PCBuilder" method="POST" id="category-form" onsubmit="loadScreen()">
 
 			<h1 class="display-4 lead text-left mt-5 text-white">Why do you
 				want a pc ?</h1>
@@ -129,8 +140,8 @@
 
 			<h1 class="display-4 lead text-left mt-5 text-white">What is
 				your PC budget ?</h1>
-			<input id="slider1" name="budget" type="range" min="25000"
-				max="250000" step="10000" />
+			<input id="slider1" name="budget" type="range" min="30000"
+				max="100000" step="10000" />
 				
 			<p id="demop">
 				Rupees: <span id="demo"></span>
@@ -175,6 +186,11 @@
 
 		slider.oninput = function() {
 			output.innerHTML = this.value;
+		}
+		
+		function loadScreen()
+		{
+			 document.getElementById("overlay").style.display = "block";
 		}
 	</script>
 </body>

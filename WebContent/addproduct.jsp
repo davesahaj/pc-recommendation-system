@@ -1,4 +1,4 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>
 <%@ page import="users.User"%>
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
 		<section class="menu-wrapper">
 			<ul>
 				<li><a href="home.jsp" id="active">Home</a></li>
-				<li><a href="explore.jsp">Explore</a></li>
+				<li><a href="#">Explore</a></li>
 				<li><a href="aboutus.jsp">About us</a></li>
 				<%
 					HttpSession session = request.getSession(false);

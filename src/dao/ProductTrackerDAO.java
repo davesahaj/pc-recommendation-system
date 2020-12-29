@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import products.Product;
+
 public class ProductTrackerDAO {
 	ConnectionImplementer cni = new ConnectionImplementer();
 
@@ -70,4 +72,43 @@ public class ProductTrackerDAO {
 
 		con.close();
 	}
+
+	public int[] getIDs() throws SQLException {
+		String sql = "select * from products";
+
+		cni.loadDriver(ConnectionProvider.dbdriver);
+		Connection con = cni.getConnection();
+
+		PreparedStatement query = con.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		ResultSet result = query.executeQuery();
+
+		if (result.next()) {
+
+			result.last();
+			int[] ids = new int[result.getRow()-1];
+			int index = 0;
+			result.first();
+
+			while (result.next()) {
+				int id = result.getInt("product_id");
+				
+				ids[index] = id;
+				index++;
+
+			}
+			
+			con.close();
+
+			return ids;
+			// user.setUsername(result.getString("username"));
+
+		}
+
+		con.close();
+
+		return null;
+
+	}
+
+	
 }

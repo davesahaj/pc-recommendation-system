@@ -7,7 +7,7 @@ public class Product {
 	private String product_model;
 	private String product_speed;
 	private int product_cores;
-	private String product_info;
+	private int product_info;
 	private String product_mb_gpu_chipset;
 	private int product_mb_slot;
 	private String product_mb_cpu_socket;
@@ -92,11 +92,11 @@ public class Product {
 		this.product_cores = product_cores;
 	}
 
-	public String getProduct_info() {
+	public int getProduct_info() {
 		return product_info;
 	}
 
-	public void setProduct_info(String product_info) {
+	public void setProduct_info(int product_info) {
 		this.product_info = product_info;
 	}
 

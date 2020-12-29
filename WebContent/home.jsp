@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>
 <%@ page import="users.User"%>
 
 <!DOCTYPE html>
@@ -42,7 +41,7 @@
 		<section class="menu-wrapper">
 			<ul>
 				<li><a href="home.jsp" id="active">Home</a></li>
-				<li><a href="explore.jsp">Explore</a></li>
+				<li><a href="#">Explore</a></li>
 				<li><a href="aboutus.jsp">About us</a></li>
 				<%
 					HttpSession session = request.getSession(false);
@@ -52,6 +51,9 @@
 					User user = (User) session.getAttribute("user");
 
 					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+					if (user.getUsername().equals("admin")) {
+						out.print("<li class=user><a href=AddProduct>Add Product</a></li>");
+					}
 					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
 
 				} else {
@@ -64,13 +66,15 @@
 	</section>
 
 	<!--showcase-->
-
+	<span>${message}</span>
 	<section class="showcase">
 		<section class="content">
 			<p>“Get the best Recommendation for the type of PC that suits
 				you"</p>
 		</section>
 	</section>
+	
+	
 
 	<!--webfeatures showcase-->
 	<section class="webfeatures"
@@ -93,7 +97,8 @@
 					that suits you. Rigorous tools are our foundational beliefs and
 					have seen us serve customers</p>
 
-				<button class="btn1" onclick="getstarted()">Get Started</button>
+				
+				<a href="category.jsp"><input type="button" value="Get Started" /></a>
 			</section>
 
 			<section class="img-wrapper">

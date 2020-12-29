@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" session="false" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="users.User"%>
 <%@ page import="products.Product"%>
@@ -8,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us</title>
+<title>Your Build</title>
 <link rel="stylesheet" href="assets/css/footer.css">
 <link rel="stylesheet" href="assets/css/header.css">
 <link rel="stylesheet" href="assets/css/default.css">
@@ -42,11 +43,20 @@
 
 		<section class="menu-wrapper">
 			<ul>
-				<li><a href="home.jsp">Home</a></li>
-				<li><a href="explore.jsp">Explore</a></li>
-				<li><a href="aboutus.jsp" id="active">About us</a></li>
-				<li><a href=login.jsp>Log In</a></li>
+				<li><a href="home.jsp" id="active">Home</a></li>
+				<li><a href="#">Explore</a></li>
+				<li><a href="aboutus.jsp">About us</a></li>
+				<%
+					HttpSession session = request.getSession(false);
+				if (session == null) {
+					response.sendRedirect(request.getContextPath() + "/home");
 
+				} else {
+					User user = (User) session.getAttribute("user");
+					out.print("<li class=user><a href=profile.jsp>" + user.getUsername() + "</a></li>");
+					out.print("<li class=user><a href=LogoutServlet>Log Out</a></li>");
+				}
+				%>
 
 			</ul>
 		</section>
@@ -67,10 +77,14 @@
 				<c:forEach var="product" items="${products}">
 					<div class="card">
 
-						<img src="assets/images/${product.getProduct_type()}.svg" alt="CPU">
-						<h1>${product.getProduct_type() }</h1>
-						<p>${product.getProduct_price()}</p>
-						<a href="amazon.com">Buy Online</a>
+						<img src="assets/images/${product.getProduct_type()}.svg">
+						<h1>${product.getProduct_brand() }</h1>
+						<p>
+						${product.getProduct_model()}
+						<br>
+						${product.getProduct_price()}
+						</p>
+						<a href="${product.getProduct_URL()}" target="_blank">Buy Online</a>
 					</div>
 				</c:forEach>
 			</div>

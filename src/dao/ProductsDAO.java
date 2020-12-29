@@ -1,4 +1,5 @@
 package dao;
+
 //{"amazon": {"url": "https://www.amazon.in/dp/B0815JJQQ8", "price": ""}, "flipkart": {"url": "www.flipkart.com", "price": "1203"}}
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class ProductsDAO {
 				+ "product_cpu_cores,product_mb_gpu_chipset,product_mb_slot,product_mb_cpu_socket"
 				+ ",product_ram_gpu_storage_size,product_ram_gpu_type,product_hdd_rpm,product_storage_gpu_interface"
 				+ ",product_psu_watts,product_psu_efficiency)  " + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 
@@ -40,8 +41,9 @@ public class ProductsDAO {
 			ps.setString(14, product.getProduct_psu_efficiency());
 
 			ps.executeUpdate();
-			
-			sql = "INSERT INTO productprice (product_price) values('{\"amazon\":{\"url\":\""+product.getProduct_URL()+"\",\"price\":\"\"},\"flipkart\":{\"url\":\"www.flipkart.com\",\"price\":\"\"}}')";
+
+			sql = "INSERT INTO productprice (product_price) values('{\"amazon\":{\"url\":\"" + product.getProduct_URL()
+					+ "\",\"price\":\"\"},\"flipkart\":{\"url\":\"www.flipkart.com\",\"price\":\"\"}}')";
 			ps = con.prepareStatement(sql);
 			ps.executeUpdate();
 
@@ -59,26 +61,27 @@ public class ProductsDAO {
 		cni.loadDriver(ConnectionProvider.dbdriver);
 		Connection con = cni.getConnection();
 
-		PreparedStatement query = con.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+		PreparedStatement query = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+				ResultSet.CONCUR_UPDATABLE);
 		ResultSet result = query.executeQuery();
 
 		if (result.next()) {
 
 			result.last();
-			Product[] products = new Product[result.getRow()-1];
+			Product[] products = new Product[result.getRow()];
 			int index = 0;
-			result.first();
+			result.beforeFirst();
 
 			while (result.next()) {
 				Product product = new Product();
-				// user.setUsername(result.getString("username"));
+
 				product.setProduct_id(result.getInt("product_id"));
 				product.setProduct_type(result.getString("product_type"));
 				product.setProduct_brand(result.getString("product_brand"));
 				product.setProduct_model(result.getString("product_model"));
 				product.setProduct_speed(result.getString("product_ram_cpu_gpu_speed"));
 				product.setProduct_cores(result.getInt("product_cpu_cores"));
-				product.setProduct_info(result.getString("product_info"));
+				product.setProduct_info(result.getInt("product_info"));
 				product.setProduct_mb_gpu_chipset(result.getString("product_mb_gpu_chipset"));
 				product.setProduct_mb_slot(result.getInt("product_mb_slot"));
 				product.setProduct_mb_cpu_socket(result.getString("product_mb_cpu_socket"));
@@ -91,12 +94,25 @@ public class ProductsDAO {
 
 				products[index] = product;
 				index++;
-
 			}
 
-			return products;
+			sql = "select product_id as pid, product_price->'amazon'->>'price' as price, product_price->'amazon'->>'url' as url  from productprice where product_id=?;";
+			query = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-			// user.setUsername(result.getString("username"));
+			for (int i = 0; i < products.length; i++) {
+				query.setInt(1, products[i].getProduct_id());
+				result = query.executeQuery();
+				result.next();
+				int price = (result.getInt("price"));
+				String url = (result.getString("url"));
+
+				products[i].setProduct_price(price);
+				products[i].setProduct_URL(url);
+			}
+
+			con.close();
+
+			return products;
 
 		}
 

@@ -18,7 +18,7 @@ import dao.ProductTrackerDAO;
 
 public class ProductTracker implements ServletContextListener {
 
-	//private ScheduledExecutorService scheduler;
+	private ScheduledExecutorService scheduler;
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
@@ -29,8 +29,8 @@ public class ProductTracker implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		System.out.println("Price Updation started");
 
-		/*scheduler = Executors.newSingleThreadScheduledExecutor();
-		scheduler.scheduleAtFixedRate(new Updater(), 0, 1, TimeUnit.HOURS);*/
+		// scheduler = Executors.newSingleThreadScheduledExecutor();
+		// scheduler.scheduleAtFixedRate(new Updater(), 0, 1, TimeUnit.HOURS);
 
 	}
 
@@ -50,6 +50,10 @@ class Updater implements Runnable {
 				price += digit;
 
 		}
+
+		if (price.equals(""))
+			return -1;
+
 		return Integer.parseInt(price);
 	}
 
@@ -66,10 +70,12 @@ class Updater implements Runnable {
 
 			// get the webpage text
 			Elements elements = document.select("#priceblock_ourprice");
+
 			if (elements.size() > 0)
 				for (Element e : elements) {
 					return sanatizePriceData(e.ownText());
 				}
+
 			else {
 				elements = document.select("#priceblock_dealprice");
 
@@ -90,15 +96,29 @@ class Updater implements Runnable {
 	public void PriceUpdater(int id, String platform) throws SQLException {
 
 		int price = PriceFetcher(id, platform);
+		System.out.println("Price of " + id + " is " + price);
+
 		ProductTrackerDAO Producttrackerdao = new ProductTrackerDAO();
+		System.out.println("Updating price of: " + id);
 		Producttrackerdao.setPrice(id, price, platform);
 
 	}
 
 	@Override
 	public void run() {
-		
-		
+
+		ProductTrackerDAO Producttrackerdao = new ProductTrackerDAO();
+		try {
+			int[] ids = Producttrackerdao.getIDs();
+			for (int id : ids) {
+				System.out.println("working on: " + id);
+				PriceUpdater(id, "amazon");
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 }
